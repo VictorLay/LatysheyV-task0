@@ -11,19 +11,18 @@ import java.io.*;
 import java.nio.file.Path;
 
 public class SerializeServiceImpl implements SerializeService {
-
+  private final String PATH = "src\\main\\java\\by\\epam\\latyshey\\library\\serialization\\save.ser";
   DAOFactory daoFactory = DAOFactory.getInstance();
   BookDAO bookDAO = daoFactory.getBookDAO();
   HistoryDAO historyDAO = daoFactory.getHistoryDAO();
   UserDAO userDAO = daoFactory.getUserDAO();
-
 
   @Override
   public String save() {
     SaveState state = new SaveState(userDAO.showSQLUser(), historyDAO.readHistory(),
         bookDAO.showAllBooks());
     try {
-      Path path = Path.of("src\\by\\epam\\latyshey\\library\\serialization\\save.ser")
+      Path path = Path.of(PATH)
           .toAbsolutePath();
       FileOutputStream outputStream = new FileOutputStream(path.toString());
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -39,7 +38,7 @@ public class SerializeServiceImpl implements SerializeService {
   @Override
   public String load() {
 
-    Path path = Path.of("src\\by\\epam\\latyshey\\library\\serialization\\save.ser")
+    Path path = Path.of(PATH)
         .toAbsolutePath();
     try {
       FileInputStream fileInputStream = new FileInputStream(path.toString());
