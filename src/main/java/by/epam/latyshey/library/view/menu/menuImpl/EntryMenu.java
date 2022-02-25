@@ -27,15 +27,13 @@ public class EntryMenu implements MenuCreate {
           Выбирете парамтеры входа:
           1. Вход в систему (рекомендовано при повторном входе);
           2. Вход в систему (автоматическая инициализация);
-          3. Вход в систему (пустая система);
-          4. Тестовый вызов команд (не рекомендовано).
+          3. Ю (пустая система).
           """);
 
       answer = scanner.nextLine();
       switch (answer) {
-        case "1":
+        case "1":                                                                 //todo заменить строки на константы
           controller.executeTask(CommandName.SERIALIZE_LOAD + ",");
-
           menuController.executeMenuName(MenuName.AUTHORIZATION_MENU + ",");
           exit = false;
           break;
@@ -46,18 +44,6 @@ public class EntryMenu implements MenuCreate {
           exit = false;
           break;
         case "3":
-          menuController.executeMenuName(MenuName.AUTHORIZATION_MENU + ",");
-          exit = false;
-          break;
-        case "4":
-
-          Initialization.init();
-          by.epam.latyshey.library.TestService test = new by.epam.latyshey.library.TestService();
-          test.executeTestCommand(CommandName.SIGN_IN_CUSTOMER);
-          test.executeTestCommand(CommandName.SIGN_IN_EMPLOYEE);
-          test.executeTestCommand(CommandName.REGISTRATION_CUSTOMER);
-          test.executeTestCommand(CommandName.REGISTRATION_EMPLOYEE);
-
           menuController.executeMenuName(MenuName.AUTHORIZATION_MENU + ",");
           exit = false;
           break;
