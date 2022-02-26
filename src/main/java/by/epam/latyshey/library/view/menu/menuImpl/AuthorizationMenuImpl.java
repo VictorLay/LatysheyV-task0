@@ -55,8 +55,7 @@ public class AuthorizationMenuImpl implements MenuCreate {
         case REGISTRATION:
           query = registrationView(scanner);
           response = controller.executeTask(query);
-          if (response != null)
-          {
+          if (response != null) {
             menuController.executeMenuName(response);
           }
           break;
@@ -69,11 +68,12 @@ public class AuthorizationMenuImpl implements MenuCreate {
               Изменения были сохранены.
               Пока.
               """);
-          System.out.println("Было создано книг:" + Book.getNumberOfInstance() + "шт\n" +
-              "Было создано Клиентов:" + Customer.getNumberOfInstance() + "шт\n" +
-              "Было создано Работников:" + Employee.getNumberOfInstance() + "шт\n" +
-              "Было создано Историй:" + CustomerHistory.getNumberOfInstance() + "шт\n" +
-              "Было создано Взятых книг:" + TakenBook.getNumberOfInstance() + "шт\n");
+          System.out.println(
+              "Было создано книг:" + Book.getNumberOfInstance() + "шт\n" + "Было создано Клиентов:"
+                  + Customer.getNumberOfInstance() + "шт\n" + "Было создано Работников:"
+                  + Employee.getNumberOfInstance() + "шт\n" + "Было создано Историй:"
+                  + CustomerHistory.getNumberOfInstance() + "шт\n" + "Было создано Взятых книг:"
+                  + TakenBook.getNumberOfInstance() + "шт\n");
           break;
         case SHOW_USER_SQL:
           query = CommandName.SHOW_USER_SQL + ",";
@@ -99,27 +99,26 @@ public class AuthorizationMenuImpl implements MenuCreate {
     System.out.println("Введите пароль:");
     String pass = scanner.nextLine();
 
-    String query = CommandName.SIGN_IN + ","
-        + "userName=" + "," + userName + ","
-        + "pass=" + "," + pass + ",";
+    String query =
+        CommandName.SIGN_IN + "," + "userName=" + "," + userName + "," + "pass=" + "," + pass + ",";
     return query;
   }
 
   private static String registrationView(Scanner scanner) {
     boolean exit = true;
     String query = null;
+
     do {
       String response;
-      try{
+      try {
         response = userRegistrationView();
-      }catch (InputMismatchException e){
+      } catch (InputMismatchException e) {
         System.out.println("Введённый возраст должен быть целым числом");
-        return CommandName.ERROR_MESSAGE + ", Пользовательские данные не прошли валидацию слоя View";
+        return CommandName.ERROR_MESSAGE
+            + ", Пользовательские данные не прошли валидацию слоя View";
       }
 
-      System.out.println("Кого вы хотите создать ?\n" +
-          "1. Посетитель;\n" +
-          "2. Работник.\n");
+      System.out.println("Кого вы хотите создать ?\n" + "1. Посетитель;\n" + "2. Работник.\n");
       String i = scanner.nextLine();
       switch (i) {
         case CUSTOMER:
@@ -155,16 +154,14 @@ public class AuthorizationMenuImpl implements MenuCreate {
       pass = scanner.nextLine();
       System.out.println("Введите возраст");
 
-        age = scanner.nextInt();
-        exit = false;
+      age = scanner.nextInt();
+      exit = false;
 
-    }while (exit);
+    } while (exit);
 
-    String query = ","
-        + "name=" + "," + userName + ","
-        + "name=" + "," + name + ","
-        + "pass=" + "," + pass + ","
-        + "age=" + "," + age + ",";
+    String query =
+        "," + "name=" + "," + userName + "," + "name=" + "," + name + "," + "pass=" + "," + pass
+            + "," + "age=" + "," + age + ",";
     return query;
   }
 
