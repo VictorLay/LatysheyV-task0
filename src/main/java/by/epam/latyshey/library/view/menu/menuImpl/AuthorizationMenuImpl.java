@@ -2,10 +2,12 @@ package by.epam.latyshey.library.view.menu.menuImpl;
 
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
+import by.epam.latyshey.library.controller.command.ErrorName;
 import by.epam.latyshey.library.view.ControllerConnection;
 import by.epam.latyshey.library.view.MenuController;
 import by.epam.latyshey.library.view.menu.MenuCreate;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AuthorizationMenuImpl implements MenuCreate {
@@ -47,8 +49,11 @@ public class AuthorizationMenuImpl implements MenuCreate {
           break;
         case REGISTRATION:
           query = registrationView(scanner);
-          System.out.println("Демонстрация запроса:\n" + query + "\n");
-          controller.executeTask(query);
+          response = controller.executeTask(query);
+          if (response != null)
+          {
+            menuController.executeMenuName(response);
+          }
           break;
         case EXIT:
           controller.executeTask(CommandName.SERIALIZE_SAVE + ",");
@@ -138,14 +143,35 @@ public class AuthorizationMenuImpl implements MenuCreate {
   private static String customerRegistrationView() {
     Scanner scanner = new Scanner(System.in);
     String userName, name, pass;
-    System.out.println("Введите имя пользователя");
-    userName = scanner.nextLine();
-    System.out.println("Введите имя");
-    name = scanner.nextLine();
-    System.out.println("Введите пароль");
-    pass = scanner.nextLine();
-    System.out.println("Введите возраст");
-    int age = scanner.nextInt();
+    int age = 0;
+    boolean exit = true;
+
+    do {
+
+
+      System.out.println("Введите имя пользователя");
+      userName = scanner.nextLine();
+      System.out.println("Введите имя");
+      name = scanner.nextLine();
+      System.out.println("Введите пароль");
+      pass = scanner.nextLine();
+      System.out.println("Введите возраст");
+      try
+      {
+        age = scanner.nextInt();
+        exit = false;
+      }
+      catch (InputMismatchException e)
+      {
+        System.out.println("Введённый возраст должен быть целым числом");
+        return CommandName.ERROR_MESSAGE + ", Пользовательские данные не прошли валидацию слоя View";
+      }
+
+    }while (exit);
+
+
+
+
 
     //ВНИМАНИЕ ВНИМАНИЕ ВНИМАНИЕ (необходимо выполнениие валидации пользовательских данных)
 
