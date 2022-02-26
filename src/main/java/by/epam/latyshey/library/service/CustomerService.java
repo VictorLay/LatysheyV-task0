@@ -14,5 +14,5 @@ public interface CustomerService {
 
   String showCustomerBooks(String username, String pass) throws ServiceException;
 
-  public void returnBook(String username, String pass, int bookIndex) throws ServiceException;
+  void returnBook(String username, String pass, int bookIndex) throws ServiceException;
 }

@@ -1,6 +1,5 @@
 package by.epam.latyshey.library.service;
 
-import by.epam.latyshey.library.bean.Book;
 import by.epam.latyshey.library.bean.Rarity;
 import by.epam.latyshey.library.bean.interfaces.IBook;
 
