@@ -27,6 +27,8 @@ public final class CommandProvider {
     repository.put(CommandName.SHOW_CUSTOMERS, new ShowCustomers());
     repository.put(CommandName.SERIALIZE_SAVE, new SerializeSave());
     repository.put(CommandName.SERIALIZE_LOAD, new SerializeLoad());
+    repository.put(CommandName.ERROR_MESSAGE, new ErrorMessageReturn());
+
   }
 
   Command getCommand(String commandName) {
