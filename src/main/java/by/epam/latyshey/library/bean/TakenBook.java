@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class TakenBook extends Book implements ITakenBook, Serializable {
 
+  private static int numberOfInstance = 0;
   private Date takeDate;
   private Date returnDate;
 
@@ -17,6 +18,11 @@ public class TakenBook extends Book implements ITakenBook, Serializable {
     int weeks = book.getRarity().ordinal() + 1;
     long holdingTime = 1000L * 60 * 60 * 24 * 7 * weeks;
     this.returnDate = new Date(takeDate.getTime() + holdingTime);
+    numberOfInstance++;
+  }
+
+  public static int getNumberOfInstance() {
+    return numberOfInstance;
   }
 
   @Override

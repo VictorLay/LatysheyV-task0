@@ -9,14 +9,22 @@ import java.util.ArrayList;
 
 public class CustomerHistory implements ICustomerHistory, Serializable, Comparable<Object> {
 
+  private static int numberOfInstance = 0;
   private ICustomer customer;
   private ArrayList<ITakenBook> takenBooks;
+
 
 
   public CustomerHistory(ICustomer customer) {
     takenBooks = new ArrayList<>();
     this.customer = customer;
+    numberOfInstance++;
   }
+
+  public static int getNumberOfInstance() {
+    return numberOfInstance;
+  }
+
   @Override
   public ICustomer getCustomer() {
     return customer;

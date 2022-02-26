@@ -4,17 +4,21 @@ import by.epam.latyshey.library.bean.interfaces.IBook;
 import java.io.Serializable;
 
 public class Book implements Serializable, IBook {
+  private static int numberOfInstance = 0;
 
   private String author;
   private String title;
   private Rarity rarity;
 
   public Book(String author, String title, Rarity rarity) {
+    numberOfInstance++;
     this.rarity = rarity;
     this.author = author;
     this.title = title;
   }
-
+  public static int getNumberOfInstance(){
+    return numberOfInstance;
+  }
   @Override
   public Rarity getRarity() {
     return this.rarity;

@@ -7,7 +7,19 @@ import java.util.ArrayList;
 
 public class Customer extends User implements ICustomer, Serializable, Comparable<Object> {
 
+  private static int numberOfInstance = 0;
   private ArrayList<ITakenBook> takenBooks;
+
+
+  public Customer(String userName, String name, String pass, int age) {
+    super(userName, name, pass, age);
+    takenBooks = new ArrayList<>();
+    numberOfInstance++;
+  }
+
+  public static int getNumberOfInstance() {
+    return numberOfInstance;
+  }
 
   @Override
   public int compareTo(Object o) {
@@ -20,10 +32,6 @@ public class Customer extends User implements ICustomer, Serializable, Comparabl
     this.takenBooks = takenBooks;
   }
 
-  public Customer(String userName, String name, String pass, int age) {
-    super(userName, name, pass, age);
-    takenBooks = new ArrayList<>();
-  }
 
   @Override
   public ArrayList<ITakenBook> getTakenBooks() {

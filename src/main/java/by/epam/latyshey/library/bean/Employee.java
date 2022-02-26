@@ -5,8 +5,14 @@ import java.io.Serializable;
 
 public class Employee extends User implements IEmployee, Serializable {
 
+  private static int numberOfInstance = 0;
   public Employee(String userName, String name, String pass, int age) {
     super(userName, name, pass, age);
+    numberOfInstance++;
+  }
+
+  public static int getNumberOfInstance() {
+    return numberOfInstance;
   }
 
   @Override
