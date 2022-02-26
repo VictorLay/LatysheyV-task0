@@ -10,7 +10,6 @@ public class RegistrationCustomer implements Command {
 
   @Override
   public String execute(String request) {
-    // "Registration,userName=,...,name=,...,pass=,...,age=,..."
 
     String username = request.split(",")[2],
         name = request.split(",")[4],
@@ -20,8 +19,7 @@ public class RegistrationCustomer implements Command {
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     CustomerService customerService = serviceFactory.getCustomerService();
     customerService.registration(new Customer(username, name, pass, age));
-    //ВНИМАНИЕ ВНИМАНИЕ ВНИМАНИЕ (необходимо выполнениие валидации пользовательских данных но в слое сервисов)
-    // todo: пердать данные клиент сервисы и выполнить валидацию на сервисе
+
     return null;
   }
 }

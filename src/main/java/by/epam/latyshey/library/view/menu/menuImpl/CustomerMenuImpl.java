@@ -3,6 +3,7 @@ package by.epam.latyshey.library.view.menu.menuImpl;
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
 import by.epam.latyshey.library.view.ControllerConnection;
+import by.epam.latyshey.library.view.MenuController;
 import by.epam.latyshey.library.view.menu.MenuCreate;
 
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class CustomerMenuImpl implements MenuCreate {
   public void executeResponse(String response) {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     Controller controller = controllerConnection.getController();
+    MenuController menuController = controllerConnection.getMenuController();
     String[] responseArray = response.split(",");
 
     String userName = responseArray[2],
@@ -25,6 +27,7 @@ public class CustomerMenuImpl implements MenuCreate {
     System.out.println("\nПривет " + name + "! \nРад приветствовать нашего посетителя.\n");
     Scanner scanner = new Scanner(System.in);
     String query;
+
     boolean exit = true;
     do {
 
@@ -40,40 +43,68 @@ public class CustomerMenuImpl implements MenuCreate {
 
       switch (query) {
         case ADD_BOOK:
+
           System.out.println("Введи автора:");
           String author = scanner.nextLine();
-
           System.out.println("Введи название:");
           String title = scanner.nextLine();
 
-          System.out.println(controller.executeTask(
-              CommandName.ADD_BOOK_TO_CUSTOMER + ",author=," + author + ",title=," + title +
-                  ",userName=," + userName + ",pass=," + pass));
+          menuController.executeMenuName(
+              controller.executeTask(
+                  CommandName.ADD_BOOK_TO_CUSTOMER +
+                      ",author=," + author +
+                      ",title=," + title +
+                      ",userName=," + userName +
+                      ",pass=," + pass));
           break;
+
         case RETURN_BOOK:
-          System.out.println(controller.executeTask(CommandName.SHOW_CUSTOMER_BOOKS +
-              ",username=," + userName + ",password=," + pass));
+          System.out.println(
+              "================================================================\n\n" +
+                  controller.executeTask(
+                      CommandName.SHOW_CUSTOMER_BOOKS +
+                          ",username=," + userName +
+                          ",password=," + pass) +
+                  "================================================================\n\n"
+          );
           System.out.println("Укажите [номер книги]");
-          query = scanner.nextLine();
+          query = scanner.nextLine(); //todo the place of potential mistake
+
           controller.executeTask(
-              CommandName.RETURN_BOOK + ",username=," + userName + ",password=," + pass + ",index=,"
-                  + query);
+              CommandName.RETURN_BOOK +
+                  ",username=," + userName +
+                  ",password=," + pass +
+                  ",index=," + query);
           break;
+
         case SHOW_FREE_BOOKS:
-          System.out.println(controller.executeTask(CommandName.SHOW_ALL_BOOK + ","));
+          System.out.println(
+              "================================================================\n\n" +
+              controller.executeTask(CommandName.SHOW_ALL_BOOK + ",") + "\n" +
+              "================================================================\n\n" );
           break;
+
         case SHOW_BOOKS:
-          System.out.println("Аккаунт клиента библиотеки:\n" +
-              "Логин: " + userName + "\n" +
-              "Имя: " + name + "\n" +
-              "Возраст: " + age + "\n");
-          System.out.println(controller.executeTask(CommandName.SHOW_CUSTOMER_BOOKS +
-              ",username=," + userName + ",password=," + pass));
+
+          System.out.println(
+              "================================================================\n\n" +
+                  "Аккаунт клиента библиотеки:\n" +
+                  "Логин: " + userName + "\n" +
+                  "Имя: " + name + "\n" +
+                  "Возраст: " + age + "\n" +
+                  controller.executeTask(
+                      CommandName.SHOW_CUSTOMER_BOOKS +
+                          ",username=," + userName +
+                          ",password=," + pass) +
+              "================================================================\n\n" );
+
           break;
+
         case EXIT:
           controller.executeTask(CommandName.SERIALIZE_SAVE + ",");
           exit = false;
           break;
+
         default:
           System.out.println("Выбор не распознан, попробуйте снова.");
           break;

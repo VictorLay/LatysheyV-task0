@@ -5,6 +5,7 @@ import by.epam.latyshey.library.controller.command.ErrorName;
 import by.epam.latyshey.library.service.CustomerService;
 import by.epam.latyshey.library.service.exception.ServiceException;
 import by.epam.latyshey.library.service.factory.ServiceFactory;
+import by.epam.latyshey.library.view.menu.MenuName;
 
 public class AddBookToCustomer implements Command {
 
@@ -19,9 +20,9 @@ public class AddBookToCustomer implements Command {
 
     String response;
     try {
-      response = customerService.addBookToCustomer(author, title, username, pass);
+      response = MenuName.ADDED_BOOK_VIEW + "," + customerService.addBookToCustomer(author, title, username, pass);
     } catch (ServiceException exception) {
-      response = ErrorName.SIGN_IN_ERROR + "\n" + exception.getMessage();
+      response = MenuName.ERROR_VIEW + ",\n" + exception.getMessage();
     }
 
     return response;

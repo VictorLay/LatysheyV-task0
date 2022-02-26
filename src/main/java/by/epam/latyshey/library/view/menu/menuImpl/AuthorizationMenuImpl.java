@@ -1,5 +1,10 @@
 package by.epam.latyshey.library.view.menu.menuImpl;
 
+import by.epam.latyshey.library.bean.Book;
+import by.epam.latyshey.library.bean.Customer;
+import by.epam.latyshey.library.bean.CustomerHistory;
+import by.epam.latyshey.library.bean.Employee;
+import by.epam.latyshey.library.bean.TakenBook;
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
 import by.epam.latyshey.library.controller.command.ErrorName;
@@ -64,6 +69,11 @@ public class AuthorizationMenuImpl implements MenuCreate {
               Изменения были сохранены.
               Пока.
               """);
+          System.out.println("Было создано книг:" + Book.getNumberOfInstance() + "шт\n" +
+              "Было создано Клиентов:" + Customer.getNumberOfInstance() + "шт\n" +
+              "Было создано Работников:" + Employee.getNumberOfInstance() + "шт\n" +
+              "Было создано Историй:" + CustomerHistory.getNumberOfInstance() + "шт\n" +
+              "Было создано Взятых книг:" + TakenBook.getNumberOfInstance() + "шт\n");
           break;
         case SHOW_USER_SQL:
           query = CommandName.SHOW_USER_SQL + ",";
@@ -80,12 +90,15 @@ public class AuthorizationMenuImpl implements MenuCreate {
   }
 
   private static String logInView() {
-    System.out.println("Введите Имя пользователя");
+
     Scanner scanner = new Scanner(System.in);
-    String userName, pass;
-    userName = scanner.nextLine();
-    System.out.println("Введите пароль");
-    pass = scanner.nextLine();
+
+    System.out.println("Введите Имя пользователя:");
+    String userName = scanner.nextLine();
+
+    System.out.println("Введите пароль:");
+    String pass = scanner.nextLine();
+
     String query = CommandName.SIGN_IN + ","
         + "userName=" + "," + userName + ","
         + "pass=" + "," + pass + ",";
@@ -96,17 +109,25 @@ public class AuthorizationMenuImpl implements MenuCreate {
     boolean exit = true;
     String query = null;
     do {
+      String response;
+      try{
+        response = userRegistrationView();
+      }catch (InputMismatchException e){
+        System.out.println("Введённый возраст должен быть целым числом");
+        return CommandName.ERROR_MESSAGE + ", Пользовательские данные не прошли валидацию слоя View";
+      }
+
       System.out.println("Кого вы хотите создать ?\n" +
           "1. Посетитель;\n" +
           "2. Работник.\n");
       String i = scanner.nextLine();
       switch (i) {
         case CUSTOMER:
-          query = customerRegistrationView();
+          query = CommandName.REGISTRATION_CUSTOMER + response;
           exit = false;
           break;
         case EMPLOYEE:
-          query = employeeRegistrationView();
+          query = CommandName.REGISTRATION_EMPLOYEE + response;
           exit = false;
           break;
         default:
@@ -118,37 +139,14 @@ public class AuthorizationMenuImpl implements MenuCreate {
     return query;
   }
 
-  private static String employeeRegistrationView() {
-    Scanner scanner = new Scanner(System.in);
-    String userName, name, pass;
-    System.out.println("Введите имя пользователя");
-    userName = scanner.nextLine();
-    System.out.println("Введите имя");
-    name = scanner.nextLine();
-    System.out.println("Введите пароль");
-    pass = scanner.nextLine();
-    System.out.println("Введите возраст");
-    int age = scanner.nextInt();
 
-    //ВНИМАНИЕ ВНИМАНИЕ ВНИМАНИЕ (необходимо выполнениие валидации пользовательских данных)
-
-    String query = CommandName.REGISTRATION_EMPLOYEE + ","
-        + "name=" + "," + userName + ","
-        + "name=" + "," + name + ","
-        + "pass=" + "," + pass + ","
-        + "age=" + "," + age + ",";
-    return query;
-  }
-
-  private static String customerRegistrationView() {
+  private static String userRegistrationView() throws InputMismatchException {
     Scanner scanner = new Scanner(System.in);
     String userName, name, pass;
     int age = 0;
     boolean exit = true;
 
     do {
-
-
       System.out.println("Введите имя пользователя");
       userName = scanner.nextLine();
       System.out.println("Введите имя");
@@ -156,26 +154,13 @@ public class AuthorizationMenuImpl implements MenuCreate {
       System.out.println("Введите пароль");
       pass = scanner.nextLine();
       System.out.println("Введите возраст");
-      try
-      {
+
         age = scanner.nextInt();
         exit = false;
-      }
-      catch (InputMismatchException e)
-      {
-        System.out.println("Введённый возраст должен быть целым числом");
-        return CommandName.ERROR_MESSAGE + ", Пользовательские данные не прошли валидацию слоя View";
-      }
 
     }while (exit);
 
-
-
-
-
-    //ВНИМАНИЕ ВНИМАНИЕ ВНИМАНИЕ (необходимо выполнениие валидации пользовательских данных)
-
-    String query = CommandName.REGISTRATION_CUSTOMER + ","
+    String query = ","
         + "name=" + "," + userName + ","
         + "name=" + "," + name + ","
         + "pass=" + "," + pass + ","
