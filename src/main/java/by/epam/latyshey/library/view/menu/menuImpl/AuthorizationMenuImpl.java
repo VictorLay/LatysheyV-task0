@@ -7,7 +7,7 @@ import by.epam.latyshey.library.bean.Employee;
 import by.epam.latyshey.library.bean.TakenBook;
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
-import by.epam.latyshey.library.controller.command.ErrorName;
+import by.epam.latyshey.library.validation.Validation;
 import by.epam.latyshey.library.view.ControllerConnection;
 import by.epam.latyshey.library.view.MenuController;
 import by.epam.latyshey.library.view.menu.MenuCreate;
@@ -142,20 +142,29 @@ public class AuthorizationMenuImpl implements MenuCreate {
   private static String userRegistrationView() throws InputMismatchException {
     Scanner scanner = new Scanner(System.in);
     String userName, name, pass;
-    int age = 0;
+    String age = "";
     boolean exit = true;
 
     do {
-      System.out.println("Введите имя пользователя");
+      String incorrectDataMessage = "";
+      System.out.println("Введите имя пользователя ");
       userName = scanner.nextLine();
       System.out.println("Введите имя");
       name = scanner.nextLine();
       System.out.println("Введите пароль");
       pass = scanner.nextLine();
       System.out.println("Введите возраст");
+      age = scanner.nextLine();
+      incorrectDataMessage += Validation.usersPasswordValidation(pass) ? "" : "Пароль не должен иметь пробелов и содержать от 6 символов\n";
+      incorrectDataMessage += Validation.usersUserNameValidation(userName) ? "" : "Имя пользователя '" + userName + "' не подходит\n";
+      incorrectDataMessage += Validation.usersNameValidation(name) ? "" : "Имя '" + name + "' не подходит\n";
+      incorrectDataMessage += Validation.usersAgeValidation(age) ? "" : "Возраст должен быть в диапазоне от 1 до 99\n";
 
-      age = scanner.nextInt();
-      exit = false;
+      if( incorrectDataMessage == "" ) {
+        exit = false;
+      } else {
+        System.out.println(incorrectDataMessage);
+      }
 
     } while (exit);
 
