@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     } catch (DAOException exception) {
       throw new ServiceException(exception);
     }
-
+    //todo change tru-catch to one construction
     IBook book = null;
     try {
       book = bookDAO.giveOutBook(author, title);
@@ -56,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     customerBooks.add(takenBook);
     customer.setTakenBooks(customerBooks);
 
+    //todo слабость кода (данные меняются по ссылке, а не передаются в дао)
     response = takenBook.toString();
     return response;
   }
