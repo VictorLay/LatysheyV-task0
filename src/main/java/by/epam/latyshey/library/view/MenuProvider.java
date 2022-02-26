@@ -4,8 +4,11 @@ import by.epam.latyshey.library.view.menu.MenuCreate;
 import by.epam.latyshey.library.view.menu.MenuName;
 import by.epam.latyshey.library.view.menu.menuImpl.*;
 
+import by.epam.latyshey.library.view.menu.menuImpl.authorization.AuthorizationMenuImpl;
+import by.epam.latyshey.library.view.menu.menuImpl.authorization.customer.CustomerMenuImpl;
+import by.epam.latyshey.library.view.menu.menuImpl.authorization.employee.EmployeeMenuImpl;
 import by.epam.latyshey.library.view.menu.menuImpl.view.AddedBookViewImpl;
-import by.epam.latyshey.library.view.menu.menuImpl.view.ErrorViewImpl;
+import by.epam.latyshey.library.view.menu.menuImpl.ErrorViewImpl;
 import by.epam.latyshey.library.view.menu.menuImpl.view.ShowResponseView;
 import java.util.HashMap;
 import java.util.Locale;

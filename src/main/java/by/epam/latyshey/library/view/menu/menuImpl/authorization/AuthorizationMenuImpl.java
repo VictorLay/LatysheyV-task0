@@ -1,4 +1,4 @@
-package by.epam.latyshey.library.view.menu.menuImpl;
+package by.epam.latyshey.library.view.menu.menuImpl.authorization;
 
 import by.epam.latyshey.library.bean.Book;
 import by.epam.latyshey.library.bean.Customer;

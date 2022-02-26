@@ -1,4 +1,4 @@
-package by.epam.latyshey.library.view.menu.menuImpl.view;
+package by.epam.latyshey.library.view.menu.menuImpl;
 
 import by.epam.latyshey.library.view.menu.MenuCreate;
 

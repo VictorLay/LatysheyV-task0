@@ -1,4 +1,4 @@
-package by.epam.latyshey.library.view.menu.menuImpl;
+package by.epam.latyshey.library.view.menu.menuImpl.authorization.customer;
 
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
