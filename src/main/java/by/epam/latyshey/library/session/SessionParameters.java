@@ -10,7 +10,7 @@ public class SessionParameters {
     SessionParameters.loggedInUser = loggedInUser;
   }
 
-  public static void removeLoggedInUser(IUser loggedInUser) {
+  public static void removeLoggedInUser() {
     SessionParameters.loggedInUser = null;
   }
 

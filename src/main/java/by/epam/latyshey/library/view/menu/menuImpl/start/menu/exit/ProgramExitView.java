@@ -10,7 +10,7 @@ import by.epam.latyshey.library.controller.command.CommandName;
 import by.epam.latyshey.library.view.ControllerConnection;
 import by.epam.latyshey.library.view.menu.MenuCreate;
 
-public class ExitView implements MenuCreate {
+public class ProgramExitView implements MenuCreate {
 
   @Override
   public void executeResponse(String query) {

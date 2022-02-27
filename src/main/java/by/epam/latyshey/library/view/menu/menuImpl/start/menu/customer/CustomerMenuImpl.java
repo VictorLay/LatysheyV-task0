@@ -24,13 +24,9 @@ public class CustomerMenuImpl implements MenuCreate {
   }
 
   private void CustomerMenuView(Controller controller, MenuController menuController) {
-    String userName = SessionParameters.getLoggedInUser()
-        .getUserName(), name = SessionParameters.getLoggedInUser()
-        .getName(), pass = SessionParameters.getLoggedInUser().getPass();
-    int age = SessionParameters.getLoggedInUser().getAge();
 
-    System.out.println(
-        "\nПривет " + name + "!" + "\nРады приветствовать посетителя в нашем приложении.");
+    System.out.println("\nПривет " + SessionParameters.getLoggedInUser().getName() + "!"
+        + "\nРады приветствовать посетителя в нашем приложении.");
     Scanner scanner = new Scanner(System.in);
     String choice;
     boolean exit = true;
@@ -67,7 +63,7 @@ public class CustomerMenuImpl implements MenuCreate {
           break;
 
         case EXIT:
-          controller.executeTask(CommandName.SERIALIZE_SAVE + ",");
+          menuController.executeMenuByName(MenuName.CUSTOMER_EXIT_VIEW);
           exit = false;
           break;
 

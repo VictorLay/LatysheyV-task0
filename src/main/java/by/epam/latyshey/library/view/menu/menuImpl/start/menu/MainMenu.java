@@ -46,7 +46,7 @@ public class MainMenu implements MenuCreate {
           break;
 
         case EXIT:
-          menuController.executeMenuByName(MenuName.EXIT_VIEW + ",");
+          menuController.executeMenuByName(MenuName.PROGRAM_EXIT_VIEW + ",");
           exit = false;
           break;
 
