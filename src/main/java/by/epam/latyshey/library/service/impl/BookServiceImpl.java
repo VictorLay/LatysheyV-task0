@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class BookServiceImpl implements BooksService {
 
-
   DAOFactory daoFactory = DAOFactory.getInstance();
   BookDAO daoBook = daoFactory.getBookDAO();
 

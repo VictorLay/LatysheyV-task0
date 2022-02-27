@@ -26,26 +26,26 @@ public class EntryMenu implements MenuCreate {
           ================================================================
           Здравствуйте. Вы входите в систему...
           Выбирете парамтеры входа:
-          1. Вход в систему (рекомендовано при повторном входе);
-          2. Вход в систему (автоматическая инициализация);
-          3. Ю (пустая система).      
+          1. Вход в систему (рекомендовано);
+          2. Ю (пустая система).      
           ================================================================
           """);
 
       answer = scanner.nextLine();
       switch (answer) {
         case "1":                                                                 //todo заменить строки на константы
-          controller.executeTask(CommandName.SERIALIZE_LOAD + ",");
+          String serialization = controller.executeTask(CommandName.SERIALIZE_LOAD + ",");
+          if (serialization.isEmpty())
+          {
+            Initialization.init();
+            System.out.println("Система проинициализирована автоматически.");
+          }else {
+            System.out.println(serialization);
+          }
           menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;
         case "2":
-          Initialization.init();
-
-          menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
-          exit = false;
-          break;
-        case "3":
           menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;

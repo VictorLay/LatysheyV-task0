@@ -7,6 +7,7 @@ import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.serialization.SaveState;
 import by.epam.latyshey.library.service.SerializeService;
 
+import by.epam.latyshey.library.service.exception.ServiceException;
 import java.io.*;
 import java.nio.file.Path;
 
@@ -36,8 +37,8 @@ public class SerializeServiceImpl implements SerializeService {
   }
 
   @Override
-  public String load() {
-
+  public String load() throws ServiceException{
+    String response;
     Path path = Path.of(PATH)
         .toAbsolutePath();
     try {
@@ -48,11 +49,10 @@ public class SerializeServiceImpl implements SerializeService {
       userDAO.setUsers(loadingState.getUsers());
       historyDAO.setHistory(loadingState.getHistory());
       bookDAO.setBooks(loadingState.getBooks());
-
-    } catch (IOException | ClassNotFoundException e) {
-      e.printStackTrace();
+      response = "Подключены файлы сериаллизации.";
+    } catch (IOException |ClassNotFoundException e) {
+      throw new ServiceException(e);
     }
-    return null;
+    return response;
   }
-
 }

@@ -22,7 +22,7 @@ import by.epam.latyshey.library.view.menu.menuImpl.start.menu.exit.ProgramExitVi
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.registration.RegistrationMenu;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.registration.SuccessfullyRegistrationView;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.show.users.ShowAllUsersView;
-import by.epam.latyshey.library.view.menu.menuImpl.ErrorViewImpl;
+import by.epam.latyshey.library.view.menu.menuImpl.ErrorView;
 import by.epam.latyshey.library.view.menu.menuImpl.view.ShowResponseView;
 import java.util.HashMap;
 import java.util.Locale;
@@ -46,7 +46,7 @@ public class MenuProvider {
     repository.put(MenuName.SUCCESS_RETURN_BOOK_VIEW, new SuccessReturnBookView());
     repository.put(MenuName.SHOW_ALL_CUSTOMERS_VIEW, new ShowAllCustomersView());
     repository.put(MenuName.SHOW_CUSTOMERS_HISTORIES_VIEW, new ShowCustomersHistoriesView());
-    repository.put(MenuName.ERROR_VIEW, new ErrorViewImpl());
+    repository.put(MenuName.ERROR_VIEW, new ErrorView());
     repository.put(MenuName.CUSTOMER_EXIT_VIEW, new CustomerExitView());
     repository.put(MenuName.SUCCESS_ADDED_BOOK_VIEW, new SuccessfullyAddedBookView());
     repository.put(MenuName.SHOW_CUSTOMERS_BOOKS_VIEW, new ShowCustomersBookView());

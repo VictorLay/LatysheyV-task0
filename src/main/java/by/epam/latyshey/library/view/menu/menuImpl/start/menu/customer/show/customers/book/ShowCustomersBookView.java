@@ -12,17 +12,17 @@ public class ShowCustomersBookView implements MenuCreate {
   public void executeResponse(String query) {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     Controller controller = controllerConnection.getController();
-
+    String response = controller.executeTask(CommandName.SHOW_CUSTOMER_BOOKS
+        + ",username=," + SessionParameters.getLoggedInUser().getUserName()
+        + ",password=," + SessionParameters.getLoggedInUser().getPass());
     System.out.println(
         "================================================================\n" +
             "Аккаунт клиента библиотеки:\n\n" +
             "Логин: " + SessionParameters.getLoggedInUser().getUserName() + "\n" +
             "Имя: " + SessionParameters.getLoggedInUser().getName() + "\n" +
             "Возраст: " + SessionParameters.getLoggedInUser().getAge() + "\n" +
-            controller.executeTask(CommandName.SHOW_CUSTOMER_BOOKS
-                +",username=," + SessionParameters.getLoggedInUser().getUserName()
-                +",password=," + SessionParameters.getLoggedInUser().getPass())
-            + "================================================================\n");
+            response.substring(response.indexOf(",")+1) +
+            "================================================================\n");
 
   }
 }
