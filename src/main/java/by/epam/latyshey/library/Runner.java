@@ -13,6 +13,6 @@ public class Runner {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     MenuController menuController = controllerConnection.getMenuController();
 
-    menuController.executeMenuName(MenuName.ENTRY_MENU + ",");
+    menuController.executeMenuByName(MenuName.ENTRY_MENU + ",");
   }
 }

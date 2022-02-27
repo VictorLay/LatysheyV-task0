@@ -23,28 +23,30 @@ public class EntryMenu implements MenuCreate {
     String answer;
     do {
       System.out.println("""
+          ================================================================
           Здравствуйте. Вы входите в систему...
           Выбирете парамтеры входа:
           1. Вход в систему (рекомендовано при повторном входе);
           2. Вход в систему (автоматическая инициализация);
-          3. Ю (пустая система).
+          3. Ю (пустая система).      
+          ================================================================
           """);
 
       answer = scanner.nextLine();
       switch (answer) {
         case "1":                                                                 //todo заменить строки на константы
           controller.executeTask(CommandName.SERIALIZE_LOAD + ",");
-          menuController.executeMenuName(MenuName.AUTHORIZATION_MENU + ",");
+          menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;
         case "2":
           Initialization.init();
 
-          menuController.executeMenuName(MenuName.AUTHORIZATION_MENU + ",");
+          menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;
         case "3":
-          menuController.executeMenuName(MenuName.AUTHORIZATION_MENU + ",");
+          menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;
         default:

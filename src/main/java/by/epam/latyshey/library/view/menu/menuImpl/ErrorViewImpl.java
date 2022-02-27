@@ -8,9 +8,9 @@ public class ErrorViewImpl implements MenuCreate {
   public void executeResponse(String response) {
 
     System.out.println(
-        "================================================================\n\n" +
+        "================================================================\n" +
         "В программе возникло несоответствие:\n" +
-        response.substring(response.indexOf(",")+1) + "\n" +
+        response.substring(response.indexOf(",")+1) +
         "================================================================\n\n"
     );
   }
