@@ -13,6 +13,7 @@ import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.CustomerService;
 import by.epam.latyshey.library.service.exception.ServiceException;
 
+import by.epam.latyshey.library.view.menu.MenuName;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -71,12 +72,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
     ArrayList<ITakenBook> customerBooks = customer.getTakenBooks();
     String response = "У вас хранятся следующие книги:\n";
-    int i = 1;
+    int i = 0;
     for (ITakenBook book : customerBooks) {
-      response += "[" + (i++) + "]" + book + "\n";
+      response += "[" + (++i) + "]" + book + "\n";
 
     }
-    return response;
+    return i + "," + response;
   }
 
   @Override
@@ -103,10 +104,11 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public void registration(ICustomer customer) {
+  public String registration(ICustomer customer) {
     userDAO.registration((Customer) customer);
     ICustomerHistory history = new CustomerHistory(customer);
     historyDAO.createHistory(history);
-
+    //todo выполняется проверка валидации и на её основе возвращается ответ
+    return MenuName.SUCCESS_REGISTRATION_VIEW + "," + customer.toString();
   }
 }

@@ -4,6 +4,7 @@ import by.epam.latyshey.library.bean.interfaces.IUser;
 import by.epam.latyshey.library.dao.UserDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
 
+import by.epam.latyshey.library.session.SessionParameters;
 import java.util.ArrayList;
 
 public class UserSQL implements UserDAO {
@@ -31,6 +32,7 @@ public class UserSQL implements UserDAO {
     if (user == null) {
       throw new DAOException("\nВНИМАНИЕ! Неверное имя пользователя или пароль!\n");
     }
+    SessionParameters.setLoggedInUser(user);
     return user;
   }
 

@@ -20,7 +20,7 @@ public class AddBookToCustomer implements Command {
 
     String response;
     try {
-      response = MenuName.ADDED_BOOK_VIEW + "," + customerService.addBookToCustomer(author, title, username, pass);
+      response = MenuName.SUCCESS_ADDED_BOOK_VIEW + "," + customerService.addBookToCustomer(author, title, username, pass);
     } catch (ServiceException exception) {
       response = MenuName.ERROR_VIEW + ",\n" + exception.getMessage();
     }

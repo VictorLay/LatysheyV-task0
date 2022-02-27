@@ -6,7 +6,7 @@ public class MenuController {
 
   private final MenuProvider providerMenu = new MenuProvider();
 
-  public void executeMenuName(String response) {
+  public void executeMenuByName(String response) {
     String menuName;
 
     menuName = response.substring(0, response.indexOf(","));

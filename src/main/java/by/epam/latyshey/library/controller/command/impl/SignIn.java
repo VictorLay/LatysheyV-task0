@@ -5,6 +5,7 @@ import by.epam.latyshey.library.controller.command.ErrorName;
 import by.epam.latyshey.library.service.UserService;
 import by.epam.latyshey.library.service.exception.ServiceException;
 import by.epam.latyshey.library.service.factory.ServiceFactory;
+import by.epam.latyshey.library.view.menu.MenuName;
 
 
 public class SignIn implements Command {
@@ -19,8 +20,10 @@ public class SignIn implements Command {
     String response;
     try {
       response = userService.signIn(username, pass);
+      //todo изменить responses
     } catch (ServiceException exception) {
-      response = ErrorName.SIGN_IN_ERROR + "\n" + exception.getMessage();
+
+      response = MenuName.ERROR_VIEW + ",\n" + exception.getMessage();
     }
 
     return response;
