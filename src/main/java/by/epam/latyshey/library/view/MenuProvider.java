@@ -10,6 +10,7 @@ import by.epam.latyshey.library.view.menu.menuImpl.start.menu.customer.CustomerM
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.customer.add.book.AddBookMenu;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.customer.add.book.SuccessfullyAddedBookView;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.customer.returning.book.ReturnBookMenu;
+import by.epam.latyshey.library.view.menu.menuImpl.start.menu.customer.show.free.books.ShowFreeBooksView;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.employee.EmployeeMenuImpl;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.exit.ExitView;
 import by.epam.latyshey.library.view.menu.menuImpl.start.menu.registration.RegistrationMenu;
@@ -37,6 +38,7 @@ public class MenuProvider {
 
     repository.put(MenuName.ERROR_VIEW, new ErrorViewImpl());
     repository.put(MenuName.SUCCESS_ADDED_BOOK_VIEW, new SuccessfullyAddedBookView());
+    repository.put(MenuName.SHOW_FREE_LIBRARIAN_BOOKS_VIEW, new ShowFreeBooksView());
     repository.put(MenuName.SHOW_RESPONSE_VIEW, new ShowResponseView());
     repository.put(MenuName.SUCCESS_REGISTRATION_VIEW, new SuccessfullyRegistrationView());
     repository.put(MenuName.EXIT_VIEW, new ExitView());

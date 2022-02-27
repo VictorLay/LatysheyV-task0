@@ -55,30 +55,10 @@ public class CustomerMenuImpl implements MenuCreate {
         case RETURN_BOOK:
 
           menuController.executeMenuByName(MenuName.RETURN_BOOK_MENU + ",");
-
-//          System.out.println(
-//              "================================================================\n" +
-//                  controller.executeTask(
-//                      CommandName.SHOW_CUSTOMER_BOOKS +
-//                          ",username=," + userName +
-//                          ",password=," + pass) +
-//                  "================================================================\n"
-//          );
-//          System.out.println("Укажите [номер книги]");
-//          choice = scanner.nextLine(); //todo the place of potential mistake
-//
-//          controller.executeTask(
-//              CommandName.RETURN_BOOK +
-//                  ",username=," + userName +
-//                  ",password=," + pass +
-//                  ",index=," + choice);
           break;
 
         case SHOW_FREE_BOOKS:
-          System.out.println(
-              "================================================================\n" +
-                  controller.executeTask(CommandName.SHOW_ALL_BOOK + ",") + "\n" +
-                  "================================================================\n");
+          menuController.executeMenuByName(MenuName.SHOW_FREE_LIBRARIAN_BOOKS_VIEW + ",");
           break;
 
         case SHOW_BOOKS:
