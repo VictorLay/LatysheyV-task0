@@ -26,5 +26,13 @@ public class Validation {
     Matcher matcher = pattern.matcher(password);
     return matcher.find();
   }
+  public static boolean integerNumberInRangeValidation(int value, int min, int max) {
+    return (min <= value) && (value <= max);
+  }
 
+  public static boolean isStringValueNumber(String value){
+    Pattern pattern = Pattern.compile("^[1-9]{1}[0-9]{0,}$");
+    Matcher matcher = pattern.matcher(value);
+    return matcher.find();
+  }
 }
