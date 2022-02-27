@@ -2,59 +2,59 @@ package by.epam.latyshey.library.view.menu.menuImpl.start.menu.employee;
 
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
+import by.epam.latyshey.library.session.SessionParameters;
 import by.epam.latyshey.library.view.ControllerConnection;
 import by.epam.latyshey.library.view.MenuController;
 import by.epam.latyshey.library.view.menu.MenuCreate;
 
+import by.epam.latyshey.library.view.menu.MenuName;
 import java.util.Scanner;
 
-public class EmployeeMenuImpl implements MenuCreate {
-
-  private final String SHOW_CUSTOMERS = "2", SHOW_CUSTOMERS_HISTORIES = "1", EXIT = "3";
+public class EmployeeMenu implements MenuCreate {
 
   @Override
   public void executeResponse(String response) {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     MenuController menuController = controllerConnection.getMenuController();
     Controller controller = controllerConnection.getController();
-    String[] responseArray = response.split(",");
 
-    String userName = responseArray[2],
-        name = responseArray[4],
-        pass = responseArray[6];
-    int age = Integer.parseInt(responseArray[8]);
+    EmployeeMenuView(controller, menuController);
+  }
 
-    System.out.println("\n Привет " + name + "! \nРад приветствовать нашего работника.\n");
+  private void EmployeeMenuView(Controller controller, MenuController menuController) {
+    System.out.println("\n Привет " + SessionParameters.getLoggedInUser().getName()
+        + "! \nРад приветствовать нашего работника.\n");
+
+    final String SHOW_ALL_CUSTOMERS = "2",
+        SHOW_CUSTOMERS_HISTORIES = "1",
+        EXIT = "3";
     Scanner scanner = new Scanner(System.in);
-    String query;
     boolean exit = true;
     do {
-
       System.out.println("""
           Выберите соответствущий пункт меню:
           1: Истории пользователей
           2: Список пользователей библиотеки
           3: Выйти.
           """);
-      query = scanner.nextLine();
+      String query = scanner.nextLine();
 
       switch (query) {
         case SHOW_CUSTOMERS_HISTORIES:
-          System.out.println(controller.executeTask(CommandName.SHOW_CUSTOMERS_HISTORIES + ","));
+          menuController.executeMenuByName(MenuName.SHOW_CUSTOMERS_HISTORIES_VIEW + ",");
           break;
-        case SHOW_CUSTOMERS:
-          System.out.println(controller.executeTask(CommandName.SHOW_CUSTOMERS + ","));
+        case SHOW_ALL_CUSTOMERS:
+          menuController.executeMenuByName(MenuName.SHOW_ALL_CUSTOMERS_VIEW + ",");
           break;
         case EXIT:
+          menuController.executeMenuByName(MenuName.EMPLOYEE_EXIT_VIEW + ",");
           exit = false;
           break;
         default:
           System.out.println("Выбор не распознан, попробуйте снова.");
           break;
       }
-
-
     } while (exit);
-
   }
 }
+

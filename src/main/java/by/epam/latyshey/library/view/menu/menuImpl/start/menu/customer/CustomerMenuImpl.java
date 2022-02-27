@@ -1,29 +1,29 @@
 package by.epam.latyshey.library.view.menu.menuImpl.start.menu.customer;
 
-import by.epam.latyshey.library.controller.Controller;
-import by.epam.latyshey.library.controller.command.CommandName;
 import by.epam.latyshey.library.session.SessionParameters;
 import by.epam.latyshey.library.view.ControllerConnection;
 import by.epam.latyshey.library.view.MenuController;
 import by.epam.latyshey.library.view.menu.MenuCreate;
-
 import by.epam.latyshey.library.view.menu.MenuName;
 import java.util.Scanner;
 
 public class CustomerMenuImpl implements MenuCreate {
 
-  private final String ADD_BOOK = "1", RETURN_CUSTOMERS_BOOK = "2", SHOW_FREE_BOOKS = "3", SHOW_CUSTOMERS_BOOKS = "4", EXIT = "5";
 
   @Override
   public void executeResponse(String response) {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
-    Controller controller = controllerConnection.getController();
     MenuController menuController = controllerConnection.getMenuController();
 
-    CustomerMenuView(controller, menuController);
+    CustomerMenuView(menuController);
   }
 
-  private void CustomerMenuView(Controller controller, MenuController menuController) {
+  private void CustomerMenuView(MenuController menuController) {
+    final String ADD_BOOK = "1",
+        RETURN_CUSTOMERS_BOOK = "2",
+        SHOW_FREE_BOOKS = "3",
+        SHOW_CUSTOMERS_BOOKS = "4",
+        EXIT = "5";
 
     System.out.println("\nПривет " + SessionParameters.getLoggedInUser().getName() + "!"
         + "\nРады приветствовать посетителя в нашем приложении.");
@@ -59,11 +59,11 @@ public class CustomerMenuImpl implements MenuCreate {
           break;
 
         case SHOW_CUSTOMERS_BOOKS:
-          menuController.executeMenuByName(MenuName.SHOW_CUSTOMERS_BOOKS_VIEW);
+          menuController.executeMenuByName(MenuName.SHOW_CUSTOMERS_BOOKS_VIEW + ",");
           break;
 
         case EXIT:
-          menuController.executeMenuByName(MenuName.CUSTOMER_EXIT_VIEW);
+          menuController.executeMenuByName(MenuName.CUSTOMER_EXIT_VIEW + ",");
           exit = false;
           break;
 

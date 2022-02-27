@@ -81,7 +81,7 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public void returnBook(String username, String pass, int bookIndex) throws ServiceException {
+  public String returnBook(String username, String pass, int bookIndex) throws ServiceException {
 
     ICustomer customer;
     try {
@@ -101,6 +101,7 @@ public class CustomerServiceImpl implements CustomerService {
         break;
       }
     }
+    return book.toString();
   }
 
   @Override

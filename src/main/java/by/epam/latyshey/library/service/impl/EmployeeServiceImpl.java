@@ -37,7 +37,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     int i = 1;
     history.sort(new HistoriesComparator());
     for (ICustomerHistory h : history) {
-      response += "[" + i++ + "] " + h.toString() + "\n";
+      response +=
+          "----------------------------------------------------------------\n"
+        + "[Пользователь: " + (i++) + "]\n"
+        + h.toString() + "\n"
+        + "----------------------------------------------------------------\n";
     }
     return response;
   }
