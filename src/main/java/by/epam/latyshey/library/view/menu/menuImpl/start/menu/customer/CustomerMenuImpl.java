@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class CustomerMenuImpl implements MenuCreate {
 
-  private final String ADD_BOOK = "1", RETURN_BOOK = "2", SHOW_FREE_BOOKS = "3", SHOW_BOOKS = "4", EXIT = "5";
+  private final String ADD_BOOK = "1", RETURN_CUSTOMERS_BOOK = "2", SHOW_FREE_BOOKS = "3", SHOW_CUSTOMERS_BOOKS = "4", EXIT = "5";
 
   @Override
   public void executeResponse(String response) {
@@ -22,14 +22,15 @@ public class CustomerMenuImpl implements MenuCreate {
 
     CustomerMenuView(controller, menuController);
   }
-  private void CustomerMenuView(Controller controller, MenuController menuController){
-    String userName = SessionParameters.getLoggedInUser().getUserName(),
-        name = SessionParameters.getLoggedInUser().getName(),
-        pass = SessionParameters.getLoggedInUser().getPass();
-    int age =  SessionParameters.getLoggedInUser().getAge();
 
-    System.out.println("\nПривет " + name + "!" +
-        "\nРады приветствовать посетителя в нашем приложении.");
+  private void CustomerMenuView(Controller controller, MenuController menuController) {
+    String userName = SessionParameters.getLoggedInUser()
+        .getUserName(), name = SessionParameters.getLoggedInUser()
+        .getName(), pass = SessionParameters.getLoggedInUser().getPass();
+    int age = SessionParameters.getLoggedInUser().getAge();
+
+    System.out.println(
+        "\nПривет " + name + "!" + "\nРады приветствовать посетителя в нашем приложении.");
     Scanner scanner = new Scanner(System.in);
     String choice;
     boolean exit = true;
@@ -52,7 +53,7 @@ public class CustomerMenuImpl implements MenuCreate {
           menuController.executeMenuByName(MenuName.ADDED_BOOK_MENU + ",");
           break;
 
-        case RETURN_BOOK:
+        case RETURN_CUSTOMERS_BOOK:
 
           menuController.executeMenuByName(MenuName.RETURN_BOOK_MENU + ",");
           break;
@@ -61,19 +62,8 @@ public class CustomerMenuImpl implements MenuCreate {
           menuController.executeMenuByName(MenuName.SHOW_FREE_LIBRARIAN_BOOKS_VIEW + ",");
           break;
 
-        case SHOW_BOOKS:
-
-          System.out.println(
-              "================================================================\n" +
-                  "Аккаунт клиента библиотеки:\n" +
-                  "Логин: " + userName + "\n" +
-                  "Имя: " + name + "\n" +
-                  "Возраст: " + age + "\n" +
-                  controller.executeTask(CommandName.SHOW_CUSTOMER_BOOKS
-                      +",username=," + userName
-                      +",password=," + pass)
-                  + "================================================================\n");
-
+        case SHOW_CUSTOMERS_BOOKS:
+          menuController.executeMenuByName(MenuName.SHOW_CUSTOMERS_BOOKS_VIEW);
           break;
 
         case EXIT:
