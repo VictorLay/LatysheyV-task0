@@ -20,7 +20,6 @@ public class SignIn implements Command {
     String response;
     try {
       response = userService.signIn(username, pass);
-      //todo изменить responses
     } catch (ServiceException exception) {
 
       response = MenuName.ERROR_VIEW + ",\n" + exception.getMessage();

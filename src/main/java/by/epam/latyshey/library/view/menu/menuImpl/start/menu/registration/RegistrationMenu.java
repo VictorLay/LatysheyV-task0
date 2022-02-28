@@ -65,8 +65,12 @@ public class RegistrationMenu implements MenuCreate {
     Scanner scanner = new Scanner(System.in);
     String userName, name, pass, age = "";
     boolean exit = true;
-
     do {
+      System.out.println("""
+          Имя пользователя должно содержать не менее 4-х символов ( А-я, A-z, 0-9, - и _ ).
+          Имя должно содержать не менее 3-х символов (А-я, A-z и " " ).
+          Пароль должен содержать не менее 6-ти символов
+          """);
       String validationMessage = "";
       System.out.println("Введите имя пользователя ");
       userName = scanner.nextLine();

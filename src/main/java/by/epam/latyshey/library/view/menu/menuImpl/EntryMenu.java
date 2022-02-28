@@ -21,19 +21,21 @@ public class EntryMenu implements MenuCreate {
     boolean exit = true;
     Scanner scanner = new Scanner(System.in);
     String answer;
+    final String ENTER_WITH_SERIALIZATION_DATA_LOADING = "1";
+    final String ENTER_WITH_ONLY_INITIALIZATION_DATA = "2";
     do {
       System.out.println("""
           ================================================================
           Здравствуйте. Вы входите в систему...
           Выбирете парамтеры входа:
           1. Вход в систему (рекомендовано);
-          2. Ю (пустая система).      
+          2. Вход с инициализацией (сброс данных и инициализация системы).      
           ================================================================
           """);
 
       answer = scanner.nextLine();
       switch (answer) {
-        case "1":                                                                 //todo заменить строки на константы
+        case ENTER_WITH_SERIALIZATION_DATA_LOADING:
           String serialization = controller.executeTask(CommandName.SERIALIZE_LOAD + ",");
           if (serialization.isEmpty())
           {
@@ -45,7 +47,8 @@ public class EntryMenu implements MenuCreate {
           menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;
-        case "2":
+        case ENTER_WITH_ONLY_INITIALIZATION_DATA:
+          Initialization.init();
           menuController.executeMenuByName(MenuName.MAIN_MENU + ",");
           exit = false;
           break;
@@ -53,7 +56,6 @@ public class EntryMenu implements MenuCreate {
           System.out.println("\nВыбор не распознон попробуйте снова.");
           break;
       }
-
     } while (exit);
   }
 }

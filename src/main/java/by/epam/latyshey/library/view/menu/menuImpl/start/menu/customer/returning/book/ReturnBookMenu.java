@@ -18,7 +18,6 @@ public class ReturnBookMenu implements MenuCreate {
     MenuController menuController = controllerConnection.getMenuController();
 
     ReturnBookMenuView(controller, menuController);
-    // todo if book was returned then create successReportView
   }
 
   private void ReturnBookMenuView(Controller controller, MenuController menuController) {

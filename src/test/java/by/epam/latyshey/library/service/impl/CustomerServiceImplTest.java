@@ -19,6 +19,7 @@ import by.epam.latyshey.library.dao.exception.DAOException;
 import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.dao.impl.UserSQL;
 import by.epam.latyshey.library.service.exception.ServiceException;
+import by.epam.latyshey.library.view.menu.MenuName;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -67,8 +68,7 @@ public class CustomerServiceImplTest {
         .willReturn((ICustomerHistory) new CustomerHistory(customer));*/
 
     String response = customerService.addBookToCustomer(author, title, username, password);
-    String expected =
-        "Автор: 'Николай Гоголь', название: 'Тарас Бульба', редкость: 'ORDINARY'.";
+    String expected = "Автор: 'Николай Гоголь', название: 'Тарас Бульба', редкость: 'ORDINARY'.";
 
     assertEquals(expected, response.split("\n")[0]);
   }
@@ -80,7 +80,9 @@ public class CustomerServiceImplTest {
   public void tryAddNonExistingBookToTheCustomerExpectedServiceException() throws ServiceException {
     thrown.expect(ServiceException.class);
     thrown.expectMessage("\n Книги этого автора или с таким названием найдено не было!\n");
+
     customerService.addBookToCustomer(author, "NON-EXISTING TITLE", username, password);
+
     thrown = ExpectedException.none();
   }
 
@@ -88,7 +90,74 @@ public class CustomerServiceImplTest {
   public void tryAddBookToTheNonExistingCustomerExpectedServiceException() throws ServiceException {
     thrown.expect(ServiceException.class);
     thrown.expectMessage("\nВНИМАНИЕ! Неверное имя пользователя или пароль!\n");
+
     customerService.addBookToCustomer(author, title, "NON-EXISTING USERNAME", password);
+
     thrown = ExpectedException.none();
+  }
+
+  @Test
+  public void registrationTest() {
+    String userName = "Pollack", name = "Абдула", password = "ComplexPassword@19.-_/*", age = "30";
+    String response = customerService.registration(userName, name, password, age);
+    String expected =
+        MenuName.SUCCESS_REGISTRATION_VIEW + "," + "CUSTOMER,userName=," + userName + ',' + "name=,"
+            + name + ',' + "pass=," + password + ',' + "age=," + age + ",";
+    assertEquals(expected, response);
+
+    userName = "1Pollack";
+    name = "Абдула";
+    password = "ComplexPassword@19.-_/*";
+    age = "30";
+
+    response = customerService.registration(userName, name, password, age);
+    expected =
+        MenuName.SHOW_RESPONSE_VIEW + ","
+            + "К сожалению введённые данные пользователя не являются валидными.";
+    assertEquals(expected, response);
+
+    userName = "Pollack";
+    name = "Абдула";
+    password = "mypas";
+    age = "30";
+
+    response = customerService.registration(userName, name, password, age);
+    expected =
+        MenuName.SHOW_RESPONSE_VIEW + ","
+            + "К сожалению введённые данные пользователя не являются валидными.";
+    assertEquals(expected, response);
+
+    userName = "Pollack";
+    name = "Абдула";
+    password = "ComplexPassword@19.-_/*";
+    age = "3d0";
+
+    response = customerService.registration(userName, name, password, age);
+    expected =
+        MenuName.SHOW_RESPONSE_VIEW + ","
+            + "К сожалению введённые данные пользователя не являются валидными.";
+    assertEquals(expected, response);
+
+    userName = "Pollack";
+    name = "Абду@ла";
+    password = "ComplexPassword@19.-_/*";
+    age = "30";
+
+    response = customerService.registration(userName, name, password, age);
+    expected =
+        MenuName.SHOW_RESPONSE_VIEW + ","
+            + "К сожалению введённые данные пользователя не являются валидными.";
+    assertEquals(expected, response);
+
+    userName = "Pollack";
+    name = "Абдула";
+    password = "Comp exPassword@19.-_/*";
+    age = "3d0";
+
+    response = customerService.registration(userName, name, password, age);
+    expected =
+        MenuName.SHOW_RESPONSE_VIEW + ","
+            + "К сожалению введённые данные пользователя не являются валидными.";
+    assertEquals(expected, response);
   }
 }

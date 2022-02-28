@@ -18,8 +18,7 @@ public class RegistrationEmployee implements Command {
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     EmployeeService employeeService = serviceFactory.getEmployeeService();
     employeeService.registration(new Employee(username, name, pass, age));
-    //ВНИМАНИЕ ВНИМАНИЕ ВНИМАНИЕ (необходимо выполнениие валидации пользовательских данных но в слое сервисов)
-    // todo: пердать данные клиент сервисы и выполнить валидацию на сервисе
+
     return null;
   }
 }

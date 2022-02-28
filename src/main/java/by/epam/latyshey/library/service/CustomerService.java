@@ -10,7 +10,7 @@ public interface CustomerService {
   String addBookToCustomer(String author, String title, String username, String pass)
       throws ServiceException;
 
-  String registration(ICustomer customer);
+  String registration(String username, String name, String pass, String age);
 
   String showCustomerBooks(String username, String pass) throws ServiceException;
 

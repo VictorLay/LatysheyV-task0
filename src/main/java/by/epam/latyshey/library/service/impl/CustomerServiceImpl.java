@@ -13,6 +13,7 @@ import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.CustomerService;
 import by.epam.latyshey.library.service.exception.ServiceException;
 
+import by.epam.latyshey.library.validation.Validation;
 import by.epam.latyshey.library.view.menu.MenuName;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,17 +26,12 @@ public class CustomerServiceImpl implements CustomerService {
   HistoryDAO historyDAO = daoFactory.getHistoryDAO();
 
   @Override
-  public String addBookToCustomer(String author, String title, String username, String pass)
-      throws ServiceException {
+  public String addBookToCustomer(String author, String title, String username, String pass) throws ServiceException {
+
     ICustomer customer;
-    try {
-      customer = (ICustomer) userDAO.signIn(username, pass);
-    } catch (DAOException exception) {
-      throw new ServiceException(exception);
-    }
-    //todo change tru-catch to one construction
     IBook book = null;
     try {
+      customer = (ICustomer) userDAO.signIn(username, pass);
       book = bookDAO.giveOutBook(author, title);
     } catch (DAOException exception) {
       throw new ServiceException(exception);
@@ -105,11 +101,23 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public String registration(ICustomer customer) {
-    userDAO.registration((Customer) customer);
-    ICustomerHistory history = new CustomerHistory(customer);
-    historyDAO.createHistory(history);
-    //todo выполняется проверка валидации и на её основе возвращается ответ
-    return MenuName.SUCCESS_REGISTRATION_VIEW + "," + customer.toString();
+  public String registration(String username, String name, String pass, String age) {
+    boolean isRegistrationDataCorrect =
+        Validation.usersUserNameValidation(username) &&
+            Validation.usersNameValidation(name) &&
+            Validation.usersPasswordValidation(pass) &&
+            Validation.usersAgeValidation(age);
+
+    if (isRegistrationDataCorrect) {
+      ICustomer customer = new Customer(username, name, pass, Integer.parseInt(age));
+      userDAO.registration((Customer) customer);
+      ICustomerHistory history = new CustomerHistory(customer);
+      historyDAO.createHistory(history);
+      return MenuName.SUCCESS_REGISTRATION_VIEW + "," + customer.toString();
+    } else {
+      return MenuName.SHOW_RESPONSE_VIEW + ","
+          + "К сожалению введённые данные пользователя не являются валидными.";
+    }
+
   }
 }

@@ -28,7 +28,7 @@ public class AddBookMenu implements MenuCreate {
     System.out.println("Введи название:");
     String title = scanner.nextLine();
 
-    String response = controller.executeTask( //todo перестать передавть параметры сессии в строке
+    String response = controller.executeTask(
             CommandName.ADD_BOOK_TO_CUSTOMER +
                 ",author=," + author +
                 ",title=," + title +

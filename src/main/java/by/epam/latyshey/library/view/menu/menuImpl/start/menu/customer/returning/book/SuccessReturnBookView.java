@@ -6,6 +6,6 @@ public class SuccessReturnBookView implements MenuCreate {
 
   @Override
   public void executeResponse(String query) {
-    System.out.println("Возвращённая книга: \n"+ query);
+    System.out.println("Возвращённая книга: \n"+ query.substring(query.indexOf(",")+1));
   }
 }

@@ -12,12 +12,12 @@ public class RegistrationCustomer implements Command {
 
     String username = query.split(",")[2],
         name = query.split(",")[4],
-        pass = query.split(",")[6];
-    int age = Integer.parseInt(query.split(",")[8]);
+        pass = query.split(",")[6],
+        age = query.split(",")[8];
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     CustomerService customerService = serviceFactory.getCustomerService();
 
-    return customerService.registration(new Customer(username, name, pass, age));
+    return customerService.registration(username, name, pass, age);
   }
 }
