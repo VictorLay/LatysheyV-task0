@@ -18,6 +18,10 @@ public class EntryMenu implements MenuCreate {
     MenuController menuController = controllerConnection.getMenuController();
     Controller controller = controllerConnection.getController();
 
+    entryMenuView(menuController, controller);
+  }
+
+  private void entryMenuView(MenuController menuController, Controller controller){
     boolean exit = true;
     Scanner scanner = new Scanner(System.in);
     String answer;
