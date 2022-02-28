@@ -21,9 +21,22 @@ import java.util.Date;
 public class CustomerServiceImpl implements CustomerService {
 
   DAOFactory daoFactory = DAOFactory.getInstance();
-  UserDAO userDAO = daoFactory.getUserDAO();
-  BookDAO bookDAO = daoFactory.getBookDAO();
-  HistoryDAO historyDAO = daoFactory.getHistoryDAO();
+  UserDAO userDAO ;
+  BookDAO bookDAO ;
+  HistoryDAO historyDAO;
+
+  public CustomerServiceImpl() {
+    userDAO = daoFactory.getUserDAO();
+    bookDAO = daoFactory.getBookDAO();
+    historyDAO = daoFactory.getHistoryDAO();
+  }
+
+  public CustomerServiceImpl(UserDAO userDAO, BookDAO bookDAO,
+      HistoryDAO historyDAO) {
+    this.userDAO = userDAO;
+    this.bookDAO = bookDAO;
+    this.historyDAO = historyDAO;
+  }
 
   @Override
   public String addBookToCustomer(String author, String title, String username, String pass) throws ServiceException {

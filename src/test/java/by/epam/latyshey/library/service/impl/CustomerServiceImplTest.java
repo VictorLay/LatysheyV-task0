@@ -1,7 +1,8 @@
 package by.epam.latyshey.library.service.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 import by.epam.latyshey.library.Initialization;
 import by.epam.latyshey.library.bean.Book;
@@ -17,36 +18,49 @@ import by.epam.latyshey.library.dao.HistoryDAO;
 import by.epam.latyshey.library.dao.UserDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
 import by.epam.latyshey.library.dao.factory.DAOFactory;
-import by.epam.latyshey.library.dao.impl.UserSQL;
 import by.epam.latyshey.library.service.exception.ServiceException;
 import by.epam.latyshey.library.view.menu.MenuName;
+
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class CustomerServiceImplTest {
 
   private String author, title, username, password;
   private int bookIndex;
   private CustomerServiceImpl customerService;
+
   DAOFactory daoFactory = DAOFactory.getInstance();
-  //@Mock
+;
 
-  private UserDAO userDAO = daoFactory.getUserDAO();
+  @Mock
+  private UserDAO userDAO;
+  @Mock
+  private BookDAO bookDAO;
+  @Mock
+  private HistoryDAO historyDAO;
+//  @Mock
+//  private UserDAO userDAO = daoFactory.getUserDAO();
+//  @Mock
+//  private BookDAO bookDAO = daoFactory.getBookDAO();
+//  @Mock
+//  private HistoryDAO historyDAO = daoFactory.getHistoryDAO();
 
-  private BookDAO bookDAO = daoFactory.getBookDAO();
 
-  private HistoryDAO historyDAO = daoFactory.getHistoryDAO();
-
-
-  @Before
+  @BeforeEach
   public void setUp() {
-    //MockitoAnnotations.initMocks(this);
-    Initialization.init();
-    customerService = new CustomerServiceImpl();
+//    MockitoAnnotations.initMocks(this);
+//    Initialization.init();
+    customerService = new CustomerServiceImpl( userDAO,  bookDAO,
+         historyDAO);
     author = "Николай Гоголь";
     title = "Тарас Бульба";
     username = "VicLay";
@@ -56,23 +70,23 @@ public class CustomerServiceImplTest {
 
 
   @Test
-  public void tryAddBookToTheCustomerExpectedRightResponse() throws ServiceException {
+  public void tryAddBookToTheCustomerExpectedRightResponse() throws ServiceException, DAOException {
 
-    /*given(userDAO.signIn(username,password))
-        .willReturn((IUser) new Customer(username, "Витя", password, 18));
-    given(bookDAO.giveOutBook(author, title))
-        .willReturn((IBook) new Book(author, title, Rarity.ORDINARY));
+    when(userDAO.signIn(username,password))
+        .thenReturn((IUser) new Customer(username, "Витя", password, 18));
+    when(bookDAO.giveOutBook(author, title))
+        .thenReturn((IBook) new Book(author, title, Rarity.ORDINARY));
 
     ICustomer customer = (ICustomer) userDAO.signIn(username,password);
-    given(historyDAO.findCustomerHistory(customer))
-        .willReturn((ICustomerHistory) new CustomerHistory(customer));*/
+    when(historyDAO.findCustomerHistory(customer))
+        .thenReturn((ICustomerHistory) new CustomerHistory(customer));
 
     String response = customerService.addBookToCustomer(author, title, username, password);
     String expected = "Автор: 'Николай Гоголь', название: 'Тарас Бульба', редкость: 'ORDINARY'.";
 
     assertEquals(expected, response.split("\n")[0]);
   }
-
+/*
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
@@ -111,9 +125,8 @@ public class CustomerServiceImplTest {
     age = "30";
 
     response = customerService.registration(userName, name, password, age);
-    expected =
-        MenuName.SHOW_RESPONSE_VIEW + ","
-            + "К сожалению введённые данные пользователя не являются валидными.";
+    expected = MenuName.SHOW_RESPONSE_VIEW + ","
+        + "К сожалению введённые данные пользователя не являются валидными.";
     assertEquals(expected, response);
 
     userName = "Pollack";
@@ -122,9 +135,8 @@ public class CustomerServiceImplTest {
     age = "30";
 
     response = customerService.registration(userName, name, password, age);
-    expected =
-        MenuName.SHOW_RESPONSE_VIEW + ","
-            + "К сожалению введённые данные пользователя не являются валидными.";
+    expected = MenuName.SHOW_RESPONSE_VIEW + ","
+        + "К сожалению введённые данные пользователя не являются валидными.";
     assertEquals(expected, response);
 
     userName = "Pollack";
@@ -133,9 +145,8 @@ public class CustomerServiceImplTest {
     age = "3d0";
 
     response = customerService.registration(userName, name, password, age);
-    expected =
-        MenuName.SHOW_RESPONSE_VIEW + ","
-            + "К сожалению введённые данные пользователя не являются валидными.";
+    expected = MenuName.SHOW_RESPONSE_VIEW + ","
+        + "К сожалению введённые данные пользователя не являются валидными.";
     assertEquals(expected, response);
 
     userName = "Pollack";
@@ -144,9 +155,8 @@ public class CustomerServiceImplTest {
     age = "30";
 
     response = customerService.registration(userName, name, password, age);
-    expected =
-        MenuName.SHOW_RESPONSE_VIEW + ","
-            + "К сожалению введённые данные пользователя не являются валидными.";
+    expected = MenuName.SHOW_RESPONSE_VIEW + ","
+        + "К сожалению введённые данные пользователя не являются валидными.";
     assertEquals(expected, response);
 
     userName = "Pollack";
@@ -155,9 +165,10 @@ public class CustomerServiceImplTest {
     age = "3d0";
 
     response = customerService.registration(userName, name, password, age);
-    expected =
-        MenuName.SHOW_RESPONSE_VIEW + ","
-            + "К сожалению введённые данные пользователя не являются валидными.";
+    expected = MenuName.SHOW_RESPONSE_VIEW + ","
+        + "К сожалению введённые данные пользователя не являются валидными.";
     assertEquals(expected, response);
   }
+  */
+
 }
