@@ -17,6 +17,12 @@ public class Customer extends User implements ICustomer, Serializable, Comparabl
     numberOfInstance++;
   }
 
+  public Customer(String userName, String name, String pass, int age, ArrayList<ITakenBook> customerBooks ) {
+    super(userName, name, pass, age);
+    takenBooks = customerBooks;
+    numberOfInstance++;
+  }
+
   public static int getNumberOfInstance() {
     return numberOfInstance;
   }

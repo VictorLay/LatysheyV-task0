@@ -1,6 +1,5 @@
 package by.epam.latyshey.library.dao.impl;
 
-import by.epam.latyshey.library.bean.Customer;
 import by.epam.latyshey.library.bean.interfaces.ICustomer;
 import by.epam.latyshey.library.bean.interfaces.ICustomerHistory;
 import by.epam.latyshey.library.dao.HistoryDAO;
@@ -32,8 +31,7 @@ public class HistorySQL implements HistoryDAO {
 
   @Override
   public ICustomerHistory findCustomerHistory(ICustomer customer) {
-    for (ICustomerHistory history :
-        historySQL) {
+    for (ICustomerHistory history : historySQL) {
       if (history.getCustomer() == customer) {
         return history;
       }

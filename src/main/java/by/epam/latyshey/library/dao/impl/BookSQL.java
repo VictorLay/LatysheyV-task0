@@ -1,14 +1,15 @@
 package by.epam.latyshey.library.dao.impl;
 
-import by.epam.latyshey.library.bean.Book;
 import by.epam.latyshey.library.bean.interfaces.IBook;
 import by.epam.latyshey.library.dao.BookDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
 
 import java.util.ArrayList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BookSQL implements BookDAO {
-
+  final static Logger bookDAOLogger = LogManager.getLogger(BookSQL.class);
   private ArrayList<IBook> bookSQL;
 
   @Override
@@ -44,10 +45,12 @@ public class BookSQL implements BookDAO {
   @Override
   public IBook giveOutBook(String author, String title) throws DAOException {
     for (int i = bookSQL.size() - 1; i >= 0; i--) {
-      if (bookSQL.get(i).getAuthor().equals(author)
-          && (bookSQL.get(i).getTitle().equals(title))) {
+      if (bookSQL.get(i).getAuthor().equals(author) &&
+          bookSQL.get(i).getTitle().equals(title))
+      {
         IBook book = bookSQL.get(i);
         bookSQL.remove(i);
+        bookDAOLogger.debug("Из бд книг удалена: " + book);
         return book;
       }
     }

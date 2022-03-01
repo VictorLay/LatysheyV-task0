@@ -21,6 +21,22 @@ public class TakenBook extends Book implements ITakenBook, Serializable {
     numberOfInstance++;
   }
 
+  public TakenBook(String author, String title, Rarity rarity, Date takeDate,
+      Date returnDate) {
+    super(author, title, rarity);
+    this.takeDate = takeDate;
+    this.returnDate = returnDate;
+  }
+
+  public TakenBook(IBook book) {
+    super(book.getAuthor(), book.getTitle(), book.getRarity());
+    this.takeDate = new Date();
+    int weeks = book.getRarity().ordinal() + 1;
+    long holdingTime = 1000L * 60 * 60 * 24 * 7 * weeks;
+    this.returnDate = new Date(takeDate.getTime() + holdingTime);
+    numberOfInstance++;
+  }
+
   public static int getNumberOfInstance() {
     return numberOfInstance;
   }
@@ -43,6 +59,16 @@ public class TakenBook extends Book implements ITakenBook, Serializable {
   @Override
   public String getTitle() {
     return super.getTitle();
+  }
+
+  @Override
+  public void setAuthor(String author) {
+    super.setAuthor(author);
+  }
+
+  @Override
+  public void setTitle(String title) {
+    super.setTitle(title);
   }
 
   @Override

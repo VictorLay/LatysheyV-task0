@@ -9,11 +9,11 @@ public class Runner {
 
   public static void main(String[] args) {
 
-
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     MenuController menuController = controllerConnection.getMenuController();
 
     menuController.executeMenuByName(MenuName.ENTRY_MENU + ",");
+
     //todo валидация слоя сервисов
     // исключение для "непадательности" для сериализации при запуске программы
     // !реализация поиска по сущностям

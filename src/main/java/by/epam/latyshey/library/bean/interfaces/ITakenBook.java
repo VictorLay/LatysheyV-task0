@@ -12,6 +12,10 @@ public interface ITakenBook extends IBook {
 
   String getTitle();
 
+  void setAuthor(String author);
+
+  void setTitle(String title);
+
   String toString();
 
   void setReturnDate(Date returnDate);
