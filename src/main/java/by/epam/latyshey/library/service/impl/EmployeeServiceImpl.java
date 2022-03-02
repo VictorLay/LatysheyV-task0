@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     ArrayList<ICustomerHistory> history = historyDAO.readHistory();
     String response = "";
     int i = 1;
-    history.sort(new HistoriesComparator());
+    history.sort(new HistoriesComparator()); //todo починить сортировку
     for (ICustomerHistory h : history) {
       response +=
           "----------------------------------------------------------------\n"

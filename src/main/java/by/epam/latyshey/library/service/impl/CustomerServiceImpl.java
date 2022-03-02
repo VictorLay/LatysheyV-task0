@@ -73,13 +73,10 @@ public class CustomerServiceImpl implements CustomerService {
       }
     }
     userDAO.setUsers(users);
-
-
-    //todo слабость кода (данные меняются по ссылке, а не передаются в дао)
     response = takenBook.toString();
     return response;
   }
-
+  //todo дублирует показ книг
   @Override
   public String showCustomerBooks(String username, String pass) throws ServiceException {
     ICustomer customer;
@@ -108,7 +105,8 @@ public class CustomerServiceImpl implements CustomerService {
       throw new ServiceException(exception);
     }
     ArrayList<ITakenBook> customerBooks = customer.getTakenBooks();
-    IBook book = customerBooks.remove(bookIndex - 1);
+    IBook book = customerBooks.remove(bookIndex - 1); //todo удаление происходит по ссылке, необходимо обновлять базу
+    userDAO.updateUser(username,pass, customer);
     bookDAO.addBook(new Book(book.getAuthor(), book.getTitle(), book.getRarity()));
 
     ICustomerHistory customerHistory = historyDAO.findCustomerHistory(customer);

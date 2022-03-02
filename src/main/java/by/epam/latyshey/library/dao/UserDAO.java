@@ -14,4 +14,6 @@ public interface UserDAO {
   ArrayList<IUser> showSQLUser();
 
   void setUsers(ArrayList<IUser> users);
+
+  String updateUser(String userName, String password, IUser newUser);
 }

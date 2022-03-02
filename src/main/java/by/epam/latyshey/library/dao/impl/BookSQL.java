@@ -4,6 +4,7 @@ import by.epam.latyshey.library.bean.interfaces.IBook;
 import by.epam.latyshey.library.dao.BookDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
 
+import by.epam.latyshey.library.data.source.DataSourceCollection;
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,14 +13,18 @@ public class BookSQL implements BookDAO {
   final static Logger bookDAOLogger = LogManager.getLogger(BookSQL.class);
   private ArrayList<IBook> bookSQL;
 
+  public BookSQL() {
+    DataSourceCollection dataSource = DataSourceCollection.getInstance();
+    bookSQL = dataSource.getBooks();
+//    bookSQL = new ArrayList<>();
+  }
+
   @Override
   public void setBooks(ArrayList<IBook> books) {
     bookSQL = books;
   }
 
-  public BookSQL() {
-    bookSQL = new ArrayList<>();
-  }
+
 
   @Override
   public ArrayList<IBook> showAllBooks() {
