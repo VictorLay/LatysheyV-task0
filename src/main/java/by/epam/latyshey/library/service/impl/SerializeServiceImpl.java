@@ -46,7 +46,7 @@ public class SerializeServiceImpl implements SerializeService {
       ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
       SaveState loadingState = (SaveState) objectInputStream.readObject();
-      userDAO.setUsers(loadingState.getUsers());
+      //userDAO.setUsers(loadingState.getUsers());
       historyDAO.setHistory(loadingState.getHistory());
       bookDAO.setBooks(loadingState.getBooks());
       response = "Подключены файлы сериаллизации.";

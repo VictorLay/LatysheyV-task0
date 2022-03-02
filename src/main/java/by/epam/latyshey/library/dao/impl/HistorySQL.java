@@ -32,7 +32,7 @@ public class HistorySQL implements HistoryDAO {
   @Override
   public ICustomerHistory findCustomerHistory(ICustomer customer) {
     for (ICustomerHistory history : historySQL) {
-      if (history.getCustomer() == customer) {
+      if (history.getCustomer().equals(customer)) { //todo сравнивает ссылки
         return history;
       }
     }

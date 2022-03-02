@@ -36,24 +36,19 @@ public class MainMenu implements MenuCreate {
       String choice = scanner.nextLine();
 
       switch (choice) {
-
         case AUTHORIZATION:
           menuController.executeMenuByName(MenuName.AUTHORIZATION_MENU + ",");
           break;
-
         case REGISTRATION:
           menuController.executeMenuByName(MenuName.REGISTRATION_MENU + ",");
           break;
-
         case EXIT:
           menuController.executeMenuByName(MenuName.PROGRAM_EXIT_VIEW + ",");
           exit = false;
           break;
-
         case SHOW_USER_SQL:
           menuController.executeMenuByName(MenuName.SHOW_USERS_VIEW + ",");
           break;
-
         default:
           System.out.println("Выбор не распознан");
           break;

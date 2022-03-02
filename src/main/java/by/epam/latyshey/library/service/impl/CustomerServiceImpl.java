@@ -5,6 +5,7 @@ import by.epam.latyshey.library.bean.interfaces.ICustomerHistory;
 import by.epam.latyshey.library.bean.interfaces.ICustomer;
 import by.epam.latyshey.library.bean.interfaces.IBook;
 import by.epam.latyshey.library.bean.interfaces.ITakenBook;
+import by.epam.latyshey.library.bean.interfaces.IUser;
 import by.epam.latyshey.library.dao.BookDAO;
 import by.epam.latyshey.library.dao.HistoryDAO;
 import by.epam.latyshey.library.dao.UserDAO;
@@ -65,6 +66,14 @@ public class CustomerServiceImpl implements CustomerService {
     ArrayList<ITakenBook> customerBooks = customer.getTakenBooks();
     customerBooks.add(takenBook);
     customer.setTakenBooks(customerBooks);
+    ArrayList<IUser> users = userDAO.showSQLUser();
+    for (int i = 0; i < users.size(); i++)   {
+      if (users.get(i).equals(customer)){
+        users.set(i,customer);
+      }
+    }
+    userDAO.setUsers(users);
+
 
     //todo слабость кода (данные меняются по ссылке, а не передаются в дао)
     response = takenBook.toString();

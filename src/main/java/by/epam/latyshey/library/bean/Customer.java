@@ -77,7 +77,20 @@ public class Customer extends User implements ICustomer, Serializable, Comparabl
 
   @Override
   public boolean equals(Object obj) {
-    return super.equals(obj);
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    ICustomer other = (Customer) obj;
+    return this.getUserName().equals(other.getUserName()) &&
+        this.getName().equals(other.getName()) &&
+        this.getPass().equals(other.getPass()) &&
+        this.getAge() == other.getAge();
   }
 
 }
