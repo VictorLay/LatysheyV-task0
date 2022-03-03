@@ -47,7 +47,7 @@ public class SerializeServiceImpl implements SerializeService {
 
       SaveState loadingState = (SaveState) objectInputStream.readObject();
       //userDAO.setUsers(loadingState.getUsers());
-      historyDAO.setHistory(loadingState.getHistory());
+      historyDAO.setHistories(loadingState.getHistory());
       bookDAO.setBooks(loadingState.getBooks());
       response = "Подключены файлы сериаллизации.";
     } catch (IOException |ClassNotFoundException e) {

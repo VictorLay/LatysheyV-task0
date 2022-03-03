@@ -18,7 +18,7 @@ public class HistorySQL implements HistoryDAO {
   }
 
   @Override
-  public void setHistory(ArrayList<ICustomerHistory> histories) {
+  public void setHistories(ArrayList<ICustomerHistory> histories) {
     historySQL = histories;
   }
 
@@ -43,12 +43,13 @@ public class HistorySQL implements HistoryDAO {
   }
 
   @Override
-  public void updateCustomerHistory(ICustomerHistory newHistory, ICustomer customer) {
+  public void updateCustomerHistory(ICustomerHistory newHistory) {
     for (int i = historySQL.size() - 1; i >= 0; i--) {
-      if (historySQL.get(i).getCustomer() == customer) {
+      if (historySQL.get(i).getCustomer().equals(newHistory.getCustomer())) {
         historySQL.set(i, newHistory);
       }
     }
+
   }
 
 

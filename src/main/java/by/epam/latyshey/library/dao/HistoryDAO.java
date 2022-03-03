@@ -11,11 +11,9 @@ public interface HistoryDAO {
 
   ICustomerHistory findCustomerHistory(ICustomer customer);
 
-  void updateCustomerHistory(ICustomerHistory history, ICustomer customer);
+  void updateCustomerHistory(ICustomerHistory history);
 
   ArrayList<ICustomerHistory> readHistory();
 
-  void setHistory(ArrayList<ICustomerHistory> histories);
-//    Book giveOutBook(String author, String title);
-//    ArrayList<Book> showAllBook();
+  void setHistories(ArrayList<ICustomerHistory> histories);
 }
