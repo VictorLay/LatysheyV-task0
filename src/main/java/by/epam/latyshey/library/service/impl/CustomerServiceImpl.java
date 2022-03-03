@@ -56,13 +56,14 @@ public class CustomerServiceImpl implements CustomerService {
   /**
    *  The method {@link CustomerServiceImpl#addBookToCustomer} use for searching in the {@link CustomerServiceImpl#userDAO} required {@link Customer}
    *  username and pass parameters. Title and author parameters need for searching in the {@link CustomerServiceImpl#bookDAO} required {@link Book}.
-   *  Found {@link Book}
+   *  Found {@link Book} add to {@link Customer} and with helping {@link CustomerServiceImpl#userDAO} happens update of Data Source. Using
+   *  {@link CustomerServiceImpl#historyDAO} with {@link Customer} happen search {@link CustomerHistory} and following update Data Source.
    *
    * @param author
    * @param title
    * @param username
    * @param pass
-   * @return
+   * @return a string of information about the book which was taken.
    * @throws ServiceException
    */
   @Override
@@ -70,32 +71,23 @@ public class CustomerServiceImpl implements CustomerService {
       throws ServiceException {
 
     ICustomer customer;
-    IBook book = null;
+    IBook book;
+    ITakenBook takenBook;
     try {
       customer = (ICustomer) userDAO.signIn(username, pass);
       book = bookDAO.giveOutBook(author, title);
+      takenBook = new TakenBook(book, new Date());
     } catch (DAOException exception) {
       throw new ServiceException(exception);
     }
 
-    // Updating librarian history of customer
-    ITakenBook takenBook = new TakenBook(book, new Date());
-    ICustomerHistory history = historyDAO.findCustomerHistory(customer);
-    history.getTakenBooks().add(takenBook);
-    serviceLogger.debug(history.getTakenBooks().toString());
-    historyDAO.updateCustomerHistory(history, customer);
-
-    //updating user
     customer.getTakenBooks().add(takenBook);
     userDAO.updateUser(username, pass, customer);
 
-//    ArrayList<IUser> users = userDAO.showSQLUser();
-//    for (int i = 0; i < users.size(); i++) {
-//      if (users.get(i).equals(customer)) {
-//        users.set(i, customer);
-//      }
-//    }
-//    userDAO.setUsers(users);
+    ICustomerHistory history = historyDAO.findCustomerHistory(customer);
+    history.getTakenBooks().add(takenBook);
+    historyDAO.updateCustomerHistory(history, customer);
+
     return takenBook.toString();
   }
 
