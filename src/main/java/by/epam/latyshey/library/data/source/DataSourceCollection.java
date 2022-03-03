@@ -3,7 +3,6 @@ package by.epam.latyshey.library.data.source;
 import by.epam.latyshey.library.bean.interfaces.IBook;
 import by.epam.latyshey.library.bean.interfaces.ICustomerHistory;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataSourceCollection {
 

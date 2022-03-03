@@ -14,17 +14,31 @@ import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.CustomerService;
 import by.epam.latyshey.library.service.exception.ServiceException;
 
+import by.epam.latyshey.library.session.SessionParameters;
 import by.epam.latyshey.library.validation.Validation;
 import by.epam.latyshey.library.view.menu.MenuName;
 import java.util.ArrayList;
 import java.util.Date;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CustomerServiceImpl implements CustomerService {
 
-  DAOFactory daoFactory = DAOFactory.getInstance();
-  UserDAO userDAO ;
-  BookDAO bookDAO ;
-  HistoryDAO historyDAO;
+  private Logger serviceLogger = LogManager.getLogger(CustomerServiceImpl.class);
+
+  private final DAOFactory daoFactory = DAOFactory.getInstance();
+  /**
+   * {@link CustomerServiceImpl#historyDAO} the object which allows receiving access to librarian history ({@link CustomerHistory}) obout customers.
+   */
+  private final BookDAO bookDAO;
+  /**
+   * {@link CustomerServiceImpl#bookDAO} the object which allows receiving access to books ({@link Book}) that are placed in the library.
+   */
+  private final HistoryDAO historyDAO;
+  /**
+   * {@link CustomerServiceImpl#userDAO} the object which allows receiving access to customer ({@link Customer}) and his taken books ({@link TakenBook})
+   */
+  private final UserDAO userDAO;
 
   public CustomerServiceImpl() {
     userDAO = daoFactory.getUserDAO();
@@ -39,8 +53,21 @@ public class CustomerServiceImpl implements CustomerService {
     this.historyDAO = historyDAO;
   }
 
+  /**
+   *  The method {@link CustomerServiceImpl#addBookToCustomer} use for searching in the {@link CustomerServiceImpl#userDAO} required {@link Customer}
+   *  username and pass parameters. Title and author parameters need for searching in the {@link CustomerServiceImpl#bookDAO} required {@link Book}.
+   *  Found {@link Book}
+   *
+   * @param author
+   * @param title
+   * @param username
+   * @param pass
+   * @return
+   * @throws ServiceException
+   */
   @Override
-  public String addBookToCustomer(String author, String title, String username, String pass) throws ServiceException {
+  public String addBookToCustomer(String author, String title, String username, String pass)
+      throws ServiceException {
 
     ICustomer customer;
     IBook book = null;
@@ -50,33 +77,29 @@ public class CustomerServiceImpl implements CustomerService {
     } catch (DAOException exception) {
       throw new ServiceException(exception);
     }
-    ITakenBook takenBook;
-    String response;
 
-    takenBook = new TakenBook(book, new Date());
+    // Updating librarian history of customer
+    ITakenBook takenBook = new TakenBook(book, new Date());
     ICustomerHistory history = historyDAO.findCustomerHistory(customer);
-
-    ArrayList<ITakenBook> historyBooks = history.getTakenBooks();
-    historyBooks.add(takenBook);
-    history.setTakenBooks(historyBooks);
-
-    //history.addBookInHistory(takenBook);
+    history.getTakenBooks().add(takenBook);
+    serviceLogger.debug(history.getTakenBooks().toString());
     historyDAO.updateCustomerHistory(history, customer);
 
-    ArrayList<ITakenBook> customerBooks = customer.getTakenBooks();
-    customerBooks.add(takenBook);
-    customer.setTakenBooks(customerBooks);
-    ArrayList<IUser> users = userDAO.showSQLUser();
-    for (int i = 0; i < users.size(); i++)   {
-      if (users.get(i).equals(customer)){
-        users.set(i,customer);
-      }
-    }
-    userDAO.setUsers(users);
-    response = takenBook.toString();
-    return response;
+    //updating user
+    customer.getTakenBooks().add(takenBook);
+    userDAO.updateUser(username, pass, customer);
+
+//    ArrayList<IUser> users = userDAO.showSQLUser();
+//    for (int i = 0; i < users.size(); i++) {
+//      if (users.get(i).equals(customer)) {
+//        users.set(i, customer);
+//      }
+//    }
+//    userDAO.setUsers(users);
+    return takenBook.toString();
   }
-  //todo дублирует показ книг
+
+
   @Override
   public String showCustomerBooks(String username, String pass) throws ServiceException {
     ICustomer customer;
@@ -105,8 +128,9 @@ public class CustomerServiceImpl implements CustomerService {
       throw new ServiceException(exception);
     }
     ArrayList<ITakenBook> customerBooks = customer.getTakenBooks();
-    IBook book = customerBooks.remove(bookIndex - 1); //todo удаление происходит по ссылке, необходимо обновлять базу
-    userDAO.updateUser(username,pass, customer);
+    IBook book = customerBooks.remove(
+        bookIndex - 1); //todo удаление происходит по ссылке, необходимо обновлять базу
+    userDAO.updateUser(username, pass, customer);
     bookDAO.addBook(new Book(book.getAuthor(), book.getTitle(), book.getRarity()));
 
     ICustomerHistory customerHistory = historyDAO.findCustomerHistory(customer);

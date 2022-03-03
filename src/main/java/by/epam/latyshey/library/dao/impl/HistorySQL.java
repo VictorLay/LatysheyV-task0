@@ -4,6 +4,7 @@ import by.epam.latyshey.library.bean.interfaces.ICustomer;
 import by.epam.latyshey.library.bean.interfaces.ICustomerHistory;
 import by.epam.latyshey.library.dao.HistoryDAO;
 
+import by.epam.latyshey.library.data.source.DataSourceCollection;
 import java.util.ArrayList;
 
 public class HistorySQL implements HistoryDAO {
@@ -11,7 +12,9 @@ public class HistorySQL implements HistoryDAO {
   private ArrayList<ICustomerHistory> historySQL;
 
   public HistorySQL() {
-    historySQL = new ArrayList<>();
+    DataSourceCollection dataSource = DataSourceCollection.getInstance();
+    historySQL = dataSource.getHistories();
+   // historySQL = new ArrayList<>();
   }
 
   @Override
