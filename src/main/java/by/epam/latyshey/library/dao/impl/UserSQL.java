@@ -68,10 +68,11 @@ public class UserSQL implements UserDAO {
   @Override
   public String updateUser(String userName, String password, IUser newUser) {
     try {
-      String updatedRecord = updateUsersDataRecord(userName, password, newUser);
-      outputSourceCustom.setUsers(file1, updatedRecord);
+      String newRecord = updateUsersData(userName, password, newUser);
+      outputSourceCustom.setUsers(file1, newRecord);
     } catch (DAOException e) {
       e.printStackTrace();
+      logger.error("The attempt of update users data was failed.");
       logger.debug(e.getMessage());
     }
     return null;
@@ -131,7 +132,7 @@ public class UserSQL implements UserDAO {
     }
     throw new DAOException("\nВНИМАНИЕ! Неверное имя пользователя или пароль!\n");
   }
-  private String updateUsersDataRecord(String userName, String password, IUser user) throws DAOException {
+  private String updateUsersData(String userName, String password, IUser user) throws DAOException {
     String data = inputSourceCustom.getDataFromFile(file1);
     String[] users = inputSourceCustom.getObjectsArray(data);
 
@@ -143,9 +144,12 @@ public class UserSQL implements UserDAO {
              +userDataArray[1]+DEL
              +userDataArray[2]+DEL
              +userDataArray[3]+DEL
-             +userDataArray[4]+DEL
-             +userDataArray[5];
+             +userDataArray[4]+DEL;
+         if (userDataArray.length == 6){
+           oldUser += userDataArray[5];
+         }
 
+// todo possible ArrayIndexOutOfBoundsException
          String newUser = userDataArray[0]+DEL
              +user.getUserName()+DEL
              +user.getName()+DEL
