@@ -10,13 +10,18 @@ import java.util.ArrayList;
 public class CustomerHistory implements ICustomerHistory, Serializable, Comparable<Object> {
 
   private static int numberOfInstance = 0;
-  private ICustomer customer;
+  private final ICustomer customer;
   private ArrayList<ITakenBook> takenBooks;
 
 
 
   public CustomerHistory(ICustomer customer) {
     takenBooks = new ArrayList<>();
+    this.customer = customer;
+    numberOfInstance++;
+  }
+  public CustomerHistory(ArrayList<ITakenBook> takenBooks, ICustomer customer) {
+    this.takenBooks = takenBooks;
     this.customer = customer;
     numberOfInstance++;
   }
@@ -59,13 +64,13 @@ public class CustomerHistory implements ICustomerHistory, Serializable, Comparab
 
   @Override
   public String toString() {
-    String response;
-    response = "История " + customer.getName() + ":\n";
+    StringBuilder response;
+    response = new StringBuilder("История " + customer.getName() + ":\n");
     int i = 1;
     for (ITakenBook book : takenBooks) {
-      response += "Книга " + (i++) + ":\n" + book + "\n";
+      response.append("Книга ").append(i++).append(":\n").append(book).append("\n");
     }
-    return response;
+    return response.toString();
   }
 
 }
