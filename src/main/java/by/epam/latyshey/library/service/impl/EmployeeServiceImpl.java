@@ -21,29 +21,29 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   public String showCustomers() {
     ArrayList<IUser> users = userDAO.showSQLUser();
-    String response = "";
+    StringBuilder response = new StringBuilder();
     for (IUser customer : users) {
-        if (customer instanceof Customer) {
-            response += "Клиент:" + customer.getName() + " возраст:" + customer.getAge() + ".\n";
-        }
+      if (customer instanceof Customer) {
+        response.append("Клиент:").append(customer.getName()).append(" возраст:")
+            .append(customer.getAge()).append(".\n");
+      }
     }
-    return response;
+    return response.toString();
   }
 
   @Override
   public String showHistory() {
     ArrayList<ICustomerHistory> history = historyDAO.readHistory();
-    String response = "";
+    StringBuilder response = new StringBuilder();
     int i = 1;
-    history.sort(new HistoriesComparator()); //todo починить сортировку
+    history.sort(new HistoriesComparator());
     for (ICustomerHistory h : history) {
-      response +=
-          "----------------------------------------------------------------\n"
-        + "[Пользователь: " + (i++) + "]\n"
-        + h.toString() + "\n"
-        + "----------------------------------------------------------------\n";
+      response.append("----------------------------------------------------------------\n")
+          .append("[Пользователь: ").append(i++).append("]\n")
+          .append(h.toString()).append("\n")
+          .append("----------------------------------------------------------------\n");
     }
-    return response;
+    return response.toString();
   }
 
   @Override

@@ -28,8 +28,9 @@ public class Customer extends User implements ICustomer, Serializable, Comparabl
   }
 
   @Override
-  public int compareTo(Object o) {
-    ICustomer otherObj = (Customer) o;
+  public int compareTo(Object otherCustomer) {
+    ICustomer otherObj = (Customer) otherCustomer;
+    System.out.println(Integer.compare(this.getTakenBooks().size(), otherObj.getTakenBooks().size()));
     return Integer.compare(this.getTakenBooks().size(), otherObj.getTakenBooks().size());
   }
 

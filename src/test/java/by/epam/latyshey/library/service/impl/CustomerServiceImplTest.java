@@ -1,10 +1,8 @@
 package by.epam.latyshey.library.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
-import by.epam.latyshey.library.Initialization;
 import by.epam.latyshey.library.bean.Book;
 import by.epam.latyshey.library.bean.Customer;
 import by.epam.latyshey.library.bean.CustomerHistory;
@@ -19,27 +17,23 @@ import by.epam.latyshey.library.dao.UserDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
 import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.exception.ServiceException;
-import by.epam.latyshey.library.view.menu.MenuName;
-
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceImplTest {
 
-  private String author, title, username, password;
-  private int bookIndex;
-  private CustomerServiceImpl customerService;
+  private String author;
+  private String title;
+  private String username;
+  private String name;
+  private String password;
+  private int age;
 
-  DAOFactory daoFactory = DAOFactory.getInstance();
-;
+  private CustomerServiceImpl customerService;
 
   @Mock
   private UserDAO userDAO;
@@ -47,45 +41,56 @@ public class CustomerServiceImplTest {
   private BookDAO bookDAO;
   @Mock
   private HistoryDAO historyDAO;
-//  @Mock
-//  private UserDAO userDAO = daoFactory.getUserDAO();
-//  @Mock
-//  private BookDAO bookDAO = daoFactory.getBookDAO();
-//  @Mock
-//  private HistoryDAO historyDAO = daoFactory.getHistoryDAO();
-
 
   @BeforeEach
   public void setUp() {
-//    MockitoAnnotations.initMocks(this);
-//    Initialization.init();
-    customerService = new CustomerServiceImpl( userDAO,  bookDAO,
-         historyDAO);
+    customerService = new CustomerServiceImpl(userDAO, bookDAO, historyDAO);
     author = "Николай Гоголь";
     title = "Тарас Бульба";
     username = "VicLay";
+    name = "Витя";
     password = "123456";
-    bookIndex = 1;
+    age = 20;
+
+
   }
 
 
   @Test
   public void tryAddBookToTheCustomerExpectedRightResponse() throws ServiceException, DAOException {
 
-    when(userDAO.signIn(username,password))
-        .thenReturn((IUser) new Customer(username, "Витя", password, 18));
-    when(bookDAO.giveOutBook(author, title))
-        .thenReturn((IBook) new Book(author, title, Rarity.ORDINARY));
-
-    ICustomer customer = (ICustomer) userDAO.signIn(username,password);
-    when(historyDAO.findCustomerHistory(customer))
-        .thenReturn((ICustomerHistory) new CustomerHistory(customer));
+    when(userDAO.signIn(username, password)).thenReturn(
+        (IUser) new Customer(username, name, password, age));
+    when(bookDAO.giveOutBook(author, title)).thenReturn(
+        (IBook) new Book(author, title, Rarity.ORDINARY));
+    ICustomer customer = (ICustomer) userDAO.signIn(username, password);
+    when(historyDAO.findCustomerHistory(customer)).thenReturn(
+        (ICustomerHistory) new CustomerHistory(customer));
 
     String response = customerService.addBookToCustomer(author, title, username, password);
     String expected = "Автор: 'Николай Гоголь', название: 'Тарас Бульба', редкость: 'ORDINARY'.";
 
     assertEquals(expected, response.split("\n")[0]);
   }
+
+//  @Test
+//  public void tryAddBookToTheCustomerExpectedRightResponse1() throws ServiceException, DAOException {
+//
+//    when(userDAO.signIn(username, password)).thenReturn(
+//        (IUser) new Customer(username, name, password, age));
+//    when(bookDAO.giveOutBook(author, title)).thenReturn(
+//        (IBook) new Book(author, title, Rarity.ORDINARY));
+//    ICustomer customer = (ICustomer) userDAO.signIn(username, password);
+//    when(historyDAO.findCustomerHistory(customer)).thenReturn(
+//        (ICustomerHistory) new CustomerHistory(customer));
+//
+//    String response = customerService.addBookToCustomer(author, title, username, password);
+//    String expected = "Автор: 'Николай Гоголь', название: 'Тарас Бульба', редкость: 'ORDINARY'.";
+//
+//    assertEquals(expected, response.split("\n")[0]);
+//  }
+
+
 /*
   @Rule
   public ExpectedException thrown = ExpectedException.none();

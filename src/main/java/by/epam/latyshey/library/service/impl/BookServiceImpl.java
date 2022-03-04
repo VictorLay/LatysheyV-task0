@@ -16,14 +16,13 @@ public class BookServiceImpl implements BooksService {
 
   @Override
   public String showAllBook() {
-    String response = "";
+    StringBuilder response = new StringBuilder();
     ArrayList<IBook> books = daoBook.showAllBooks();
 
-    for (IBook b :
-        books) {
-      response += b.toString() + "\n";
+    for (IBook b : books) {
+      response.append(b.toString()).append("\n");
     }
-    return response;
+    return response.toString();
   }
 
   @Override
@@ -33,8 +32,7 @@ public class BookServiceImpl implements BooksService {
 
   @Override
   public IBook readBook(String author, String title) {
-    IBook book = daoBook.readBook(author, title);
-    return book;
+    return daoBook.readBook(author, title);
   }
 
   @Override

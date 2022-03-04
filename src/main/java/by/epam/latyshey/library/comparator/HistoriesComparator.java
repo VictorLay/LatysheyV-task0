@@ -6,7 +6,7 @@ import java.util.Comparator;
 public class HistoriesComparator implements Comparator<ICustomerHistory> {
 
   @Override
-  public int compare(ICustomerHistory o1, ICustomerHistory o2) {
-    return o2.compareTo(o1);
+  public int compare(ICustomerHistory history, ICustomerHistory otherHistory) {
+    return otherHistory.compareTo(history);
   }
 }

@@ -36,10 +36,10 @@ public class CustomerHistory implements ICustomerHistory, Serializable, Comparab
   }
 
   @Override
-  public int compareTo(Object o) {
-    ICustomerHistory otherObj = (ICustomerHistory) o;
+  public int compareTo(Object otherHistory) {
+    ICustomerHistory otherObj = (ICustomerHistory) otherHistory;
 
-    return getCustomer().compareTo(otherObj.getCustomer());
+    return Integer.compare(getTakenBooks().size(),otherObj.getTakenBooks().size());
   }
 
   @Override

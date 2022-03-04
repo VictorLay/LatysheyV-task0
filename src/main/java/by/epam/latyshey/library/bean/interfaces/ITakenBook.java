@@ -23,4 +23,5 @@ public interface ITakenBook extends IBook {
   boolean equals(Object obj);
 
   int hashCode();
+
 }

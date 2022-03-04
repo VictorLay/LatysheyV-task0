@@ -6,7 +6,7 @@ public interface ICustomerHistory {
 
   ICustomer getCustomer();
 
-  int compareTo(Object o);
+  int compareTo(Object otherHistory);
 
   void setTakenBooks(ArrayList<ITakenBook> takenBooks);
 

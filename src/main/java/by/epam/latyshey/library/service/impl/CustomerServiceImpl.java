@@ -21,9 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 public class CustomerServiceImpl implements CustomerService {
 
-  private Logger serviceLogger = LogManager.getLogger(CustomerServiceImpl.class);
-
-  private final DAOFactory daoFactory = DAOFactory.getInstance();
+  private final Logger serviceLogger = LogManager.getLogger(CustomerServiceImpl.class);
   /**
    * {@link CustomerServiceImpl#historyDAO} the object which allows receiving access to librarian
    * history ({@link CustomerHistory}) obout customers.
@@ -40,18 +38,24 @@ public class CustomerServiceImpl implements CustomerService {
    */
   private final UserDAO userDAO;
 
-
+  /**
+   * The constructor contained initialization Data Access Objects variable {@link
+   * CustomerServiceImpl#userDAO}, {@link CustomerServiceImpl#bookDAO}, and {@link
+   * CustomerServiceImpl#historyDAO}.
+   */
   public CustomerServiceImpl() {
+    DAOFactory daoFactory = DAOFactory.getInstance();
     userDAO = daoFactory.getUserDAO();
     bookDAO = daoFactory.getBookDAO();
     historyDAO = daoFactory.getHistoryDAO();
   }
 
   /**
-   * The constructor of {@link CustomerServiceImpl} designed for using with {@link org.mockito.Mockito}
-   * tests.
-   * @param userDAO data access object class which provides access to user's data
-   * @param bookDAO data access object class which provides access to book data
+   * The constructor of {@link CustomerServiceImpl} designed for using with {@link
+   * org.mockito.Mockito} tests.
+   *
+   * @param userDAO    data access object class which provides access to user's data
+   * @param bookDAO    data access object class which provides access to book data
    * @param historyDAO data access object class which provides access to history data
    */
   public CustomerServiceImpl(UserDAO userDAO, BookDAO bookDAO, HistoryDAO historyDAO) {
@@ -69,17 +73,16 @@ public class CustomerServiceImpl implements CustomerService {
    * CustomerServiceImpl#historyDAO} with {@link Customer} happen search {@link CustomerHistory} and
    * following update Data Source.
    *
-   * @param author
-   * @param title
-   * @param username
-   * @param password
+   * @param author   the full name of author.
+   * @param title    the title of the book which needs to find.
+   * @param username the nickname of the user who tries to find book.
+   * @param password the user's password.
    * @return a string of information about the book which was taken.
    * @throws ServiceException
    */
   @Override
   public String addBookToCustomer(String author, String title, String username, String password)
       throws ServiceException {
-//проблема с датой возврата
     ICustomer customer;
     IBook book;
     ITakenBook takenBook;
@@ -106,8 +109,8 @@ public class CustomerServiceImpl implements CustomerService {
    * the books which the {@link Customer} has in the order of date of taking. The first part of the
    * response before the delimiter "," has the highest list index of {@link Customer}'s books.
    *
-   * @param username
-   * @param password
+   * @param username the nickname of the user who tries to see his taken books.
+   * @param password the user's password.
    * @return string response on the format: "[highestListIndex] [,] [responseString]".
    * @throws ServiceException
    */
@@ -120,10 +123,10 @@ public class CustomerServiceImpl implements CustomerService {
       throw new ServiceException(exception);
     }
 
-    String response = "У вас хранятся следующие книги:\n";
+    StringBuilder response = new StringBuilder("У вас хранятся следующие книги:\n");
     int i = 0;
     for (ITakenBook book : customer.getTakenBooks()) {
-      response += "[" + (++i) + "]" + book + "\n";
+      response.append("[").append(++i).append("]").append(book).append("\n");
     }
 
     return i + "," + response;
@@ -134,8 +137,8 @@ public class CustomerServiceImpl implements CustomerService {
    * Customer}, add this {@link Book} to librarian Data Source and do appropriate record in the
    * {@link CustomerHistory} with the date of the returning book.
    *
-   * @param username
-   * @param password
+   * @param username        the nickname of the user who tries to return the book.
+   * @param password        the user's password
    * @param returnedBookNum order number of the returning book in customer {@link TakenBook} list.
    * @return string with information about the returned book.
    * @throws ServiceException
@@ -167,13 +170,14 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   /**
-   * Method create {@link Customer} and {@link CustomerHistory} objects. These objects write to Data
-   * Source using {@link CustomerServiceImpl#historyDAO} and {@link CustomerServiceImpl#userDAO}.
+   * The method create {@link Customer} and {@link CustomerHistory} objects. These objects write to
+   * Data Source using {@link CustomerServiceImpl#historyDAO} and {@link
+   * CustomerServiceImpl#userDAO}.
    *
-   * @param username
-   * @param name
-   * @param password
-   * @param age
+   * @param username the user's nickname which will be required for authorization.
+   * @param name     the user's name.
+   * @param password the user's password which will be required for authorization.
+   * @param age      the user's age.
    * @return string request to call menu with data about new customer or message about a mistake.
    */
   @Override
