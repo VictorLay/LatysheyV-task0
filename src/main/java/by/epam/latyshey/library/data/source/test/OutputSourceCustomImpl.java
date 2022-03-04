@@ -63,7 +63,7 @@ public class OutputSourceCustomImpl implements OutputSourceCustom {
 
   @Override
   public String wrapFieldsToTag(String data, String tag) {
-    data = "\n<" + tag + ">\n" + data + "\n</" + tag + ">" + Delimiter.DELIM6;
+    data = "\n<" + tag + ">\n" + data + "\n</" + tag + ">";
     data = data.trim();
     return data;
   }

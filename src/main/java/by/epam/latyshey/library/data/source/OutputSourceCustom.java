@@ -67,15 +67,12 @@ public class OutputSourceCustom {
   }
 
   public String convertToStringRecord(ArrayList<ITakenBook> takenBooks) {
-    String response ="";
+    StringBuilder response = new StringBuilder();
     for (ITakenBook takenBook : takenBooks) {
-      response += takenBook.getAuthor() + "§" +
-          takenBook.getTitle() + "§" +
-          takenBook.getRarity() + "§" +
-          takenBook.getTakeDate().getTime() + "§"+
-          takenBook.getReturnDate().getTime() +
-          "▼";
+      response.append(takenBook.getAuthor()).append("§").append(takenBook.getTitle()).append("§")
+          .append(takenBook.getRarity()).append("§").append(takenBook.getTakeDate().getTime())
+          .append("§").append(takenBook.getReturnDate().getTime()).append("▼");
     }
-    return response;
+    return response.toString();
   }
 }

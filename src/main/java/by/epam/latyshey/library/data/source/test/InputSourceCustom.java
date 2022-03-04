@@ -9,6 +9,7 @@ public interface InputSourceCustom {
   String findTags(String data, String tag);
 
   //String[] getTagsFieldsArray(String data, String tag);
+  String[] separateByDelimiter(String object, String delimiter);
 
   String[] findTagsFields(String data, String tag);
 }

@@ -61,6 +61,11 @@ public class InputSourceCustomImpl implements InputSourceCustom {
     return dataArray;
   }
 
+  @Override
+  public String[] separateByDelimiter(String object, String delimiter){
+    return object.split(delimiter);
+  }
+
 }
 
 
