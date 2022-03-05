@@ -9,11 +9,11 @@ import by.epam.latyshey.library.bean.interfaces.ITakenBook;
 import by.epam.latyshey.library.bean.interfaces.IUser;
 import by.epam.latyshey.library.dao.UserDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
-import by.epam.latyshey.library.data.source.test.Delimiter;
-import by.epam.latyshey.library.data.source.test.InputSourceCustom;
-import by.epam.latyshey.library.data.source.test.InputSourceCustomImpl;
-import by.epam.latyshey.library.data.source.test.OutputSourceCustom;
-import by.epam.latyshey.library.data.source.test.OutputSourceCustomImpl;
+import by.epam.latyshey.library.data.source.Delimiter;
+import by.epam.latyshey.library.data.source.InputSourceCustom;
+import by.epam.latyshey.library.data.source.impl.InputSourceCustomImpl;
+import by.epam.latyshey.library.data.source.OutputSourceCustom;
+import by.epam.latyshey.library.data.source.impl.OutputSourceCustomImpl;
 import by.epam.latyshey.library.session.SessionParameters;
 import java.io.File;
 import java.util.ArrayList;
@@ -23,12 +23,23 @@ import org.apache.logging.log4j.Logger;
 
 public class UserSQL implements UserDAO {
 
-  private final File file = new File(
-      "src/main/java/by/epam/latyshey/library/data/source/test/UserSource.txt");
+  private final File file;
   private final InputSourceCustom inputSourceCustom = new InputSourceCustomImpl();
   private final OutputSourceCustom outputSourceCustom = new OutputSourceCustomImpl();
   private static final Logger logger = LogManager.getLogger(UserSQL.class);
 
+  public UserSQL(){
+    this.file = new File(
+        "src/main/java/by/epam/latyshey/library/data/source/test/UserSource.txt");
+  }
+
+  /**
+   * The constructor witch designed for tests.
+   * @param file path to text file of data where will be written user's information.
+   */
+  public UserSQL(File file){
+    this.file = file;
+  }
 
   @Override
   public IUser signIn(String userName, String password) throws DAOException {
@@ -76,6 +87,7 @@ public class UserSQL implements UserDAO {
       logger.error(e.getMessage());
     }
   }
+
 
   private ArrayList<ITakenBook> getTakenBooksArrayList(String[] customerBooks) {
    ArrayList<ITakenBook> takenBooks = new ArrayList<>();

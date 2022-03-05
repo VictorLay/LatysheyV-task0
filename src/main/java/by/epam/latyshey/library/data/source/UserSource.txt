@@ -1,0 +1,87 @@
+<User>
+class by.epam.latyshey.library.bean.Employee¶Professor¶Карл¶123456¶56¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶DocDolitle¶Соня¶123456¶8¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Midas¶Вова¶123456¶28¶
+<TakenBooks>
+Эрих Мария Ремарк§Три товарища§RARE§1646474579967§1647684179967▼Антуан де Сент-Экзюпери§Маленький принц§RARE§1646474579972§1647684179972▼Виктор Гюго§Отверженные§ORDINARY§1646474622725§1648289022725▼
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶VicLay¶Витя¶123456¶22¶
+<TakenBooks>
+Чарльз Дарвин§Происхождение видов§RARE§1646474579982§1647684179982▼Ричард Докинз§Эгоистичный ген§VERY_RARE§1646474579982§1647079379982▼
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>
+<User>
+class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+<TakenBooks>
+
+</TakenBooks>¶
+</User>

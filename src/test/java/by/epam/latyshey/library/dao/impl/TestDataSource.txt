@@ -1,0 +1,6 @@
+<User>
+class by.epam.latyshey.library.bean.Customer¶rightUserName¶rightName¶rightPassword¶1¶
+<TakenBooks>
+rightAuthor1§rightTitle1§RARE§1000§2000▼rightAuthor2§rightTitle2§RARE§11000§22000▼rightAuthor3§rightTitle3§ORDINARY§111000§222000▼
+</TakenBooks>¶
+</User>

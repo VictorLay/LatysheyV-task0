@@ -1,5 +1,6 @@
-package by.epam.latyshey.library.data.source.test;
+package by.epam.latyshey.library.data.source.impl;
 
+import by.epam.latyshey.library.data.source.OutputSourceCustom;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;

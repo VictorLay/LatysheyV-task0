@@ -1,4 +1,4 @@
-package by.epam.latyshey.library.data.source.test;
+package by.epam.latyshey.library.data.source;
 
 public class Delimiter {
     public static final String DELIM1 = "¶"; //alt 20
