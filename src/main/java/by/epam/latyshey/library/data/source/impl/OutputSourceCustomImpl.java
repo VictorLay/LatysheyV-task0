@@ -52,6 +52,13 @@ public class OutputSourceCustomImpl implements OutputSourceCustom {
     }
   }
 
+  /**
+   * The method take array and set elements in the construction {@code <"tag"> element </"tag">}.
+   *
+   * @param dataArray array with elements is equal fields of object which need to wrap in tag.
+   * @param tag       using for wrapping array elements on this tag.
+   * @return the array of elements wrapped in the tags.
+   */
   @Override
   public String wrapFieldsArrayToTag(String[] dataArray, String tag) {
     StringBuilder response = new StringBuilder();
@@ -62,6 +69,13 @@ public class OutputSourceCustomImpl implements OutputSourceCustom {
     return response.toString();
   }
 
+  /**
+   * The method take element and set it in the construction <"tag"> element "tag">.
+   *
+   * @param data the element is equal fields of object which need to wrap in tag
+   * @param tag  using for wrapping element on this tag.
+   * @return the element wrapped in the tags.
+   */
   @Override
   public String wrapFieldsToTag(String data, String tag) {
     data = "\n<" + tag + ">\n" + data + "\n</" + tag + ">";
@@ -69,6 +83,14 @@ public class OutputSourceCustomImpl implements OutputSourceCustom {
     return data;
   }
 
+  /**
+   * The method is replaces actual data to updated data.
+   *
+   * @param data    the string where the all data contains.
+   * @param oldData the replaced data.
+   * @param newData the replacing data.
+   * @return updated data witch contains element newData instead oldData.
+   */
   @Override
   public String updateData(String data, String oldData, String newData) {
     return data.replace(oldData, newData);
