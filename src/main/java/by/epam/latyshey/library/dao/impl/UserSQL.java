@@ -39,11 +39,7 @@ public class UserSQL implements UserDAO {
 
   @Override
   public void registration(IUser user) {
-    String userRecord =
-        user.getClass() + Delimiter.DELIM1 + user.getUserName() + Delimiter.DELIM1 + user.getName()
-            + Delimiter.DELIM1 + user.getPass() + Delimiter.DELIM1 + user.getAge()
-            + Delimiter.DELIM1;
-    String taggedUserRecord = outputSourceCustom.wrapFieldsToTag(userRecord, "User");
+    String taggedUserRecord = userConvertToRecord(user);
     outputSourceCustom.addNewRecord(file, taggedUserRecord);
   }
 
@@ -54,7 +50,7 @@ public class UserSQL implements UserDAO {
     for (String user : users) {
       String[] userDataArray = inputSourceCustom.separateByDelimiter(user, Delimiter.DELIM1);
       try {
-        allUsers.add(createUser(userDataArray, Customer.class, Employee.class));
+        allUsers.add(createUser(userDataArray));
       } catch (DAOException e) {
         logger.error(e.getMessage());
       }
@@ -63,159 +59,134 @@ public class UserSQL implements UserDAO {
   }
 
   @Override
-  public void setUsers(ArrayList<IUser> users) { //todo проблема в неправильной записис повторю
-    StringBuilder userTag = new StringBuilder();
-    StringBuilder record = new StringBuilder();
-    for (IUser user : users) {
-      userTag
-          .append(user.getClass())
-          .append(Delimiter.DELIM1).append(user.getUserName())
-          .append(Delimiter.DELIM1).append(user.getName())
-          .append(Delimiter.DELIM1).append(user.getPass())
-          .append(Delimiter.DELIM1).append(user.getAge());
-
-      if (user.getClass().equals(Customer.class)) {
-        userTag.append(Delimiter.DELIM1);
-        String takenBooksRecord = convertTakenBooksToRecord(((Customer) user).getTakenBooks());
-        takenBooksRecord =
-            "\n" + outputSourceCustom.wrapFieldsToTag(takenBooksRecord, "TakenBooks")+Delimiter.DELIM1;
-        userTag.append(takenBooksRecord);
-      } else {
-        userTag.append("\n");
-      }
-      record.append(outputSourceCustom.wrapFieldsToTag(userTag.toString(), "User") + Delimiter.DELIM6 + "\n\n");
-      userTag = new StringBuilder();
-
-
-    }
-    logger.info("Установка пользователей:\n" + record.toString());
-    outputSourceCustom.setAllData(file, record.toString());
+  public void setUsers(ArrayList<IUser> users) {
+    String record = usersConvertToRecord(users);
+    outputSourceCustom.setAllData(file, record);
   }
-
 
   @Override
-  public String updateUser(String userName, String password, IUser newUser) {
-    //todo создать новую запись. найти пользователя. заменить старую запись на новую.
-    StringBuilder userTag = new StringBuilder();
-    StringBuilder record = new StringBuilder();
-
-      userTag
-          .append(newUser.getClass())
-          .append(Delimiter.DELIM1).append(newUser.getUserName())
-          .append(Delimiter.DELIM1).append(newUser.getName())
-          .append(Delimiter.DELIM1).append(newUser.getPass())
-          .append(Delimiter.DELIM1).append(newUser.getAge());
-
-      if (newUser.getClass().equals(Customer.class)) {
-        userTag.append(Delimiter.DELIM1);
-        String takenBooksRecord = convertTakenBooksToRecord(((Customer) newUser).getTakenBooks());
-        takenBooksRecord =
-            "\n" + outputSourceCustom.wrapFieldsToTag(takenBooksRecord, "TakenBooks") + Delimiter.DELIM1;
-        userTag.append(takenBooksRecord);
-      } else {
-        userTag.append("\n");
-      }
-      record.append(outputSourceCustom.wrapFieldsToTag(userTag.toString(), "User"));
-
-     String newRecord = record.toString();
-
-
-    String[] users = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file), "User");
-    for (String user : users) {
-      String[] userDataArray = inputSourceCustom.separateByDelimiter(user, Delimiter.DELIM1);
-
-      if (userName.equals(userDataArray[1]) && password.equals(userDataArray[3])) {
-        String allData = inputSourceCustom.readAllData(file);
-        user = outputSourceCustom.wrapFieldsToTag(user, "User");
-        String updateFullRecord = outputSourceCustom.updateData(allData, user, newRecord);
-        outputSourceCustom.setAllData(file, updateFullRecord);
-      }
+  public void updateUser(String userName, String password, IUser updatedUser){
+    String newRecord = userConvertToRecord(updatedUser);
+    try {
+      String actualUserRecord = findUserRecord(userName, password);
+      String updatedData = outputSourceCustom.updateData(inputSourceCustom.readAllData(file),
+          actualUserRecord, newRecord);
+      outputSourceCustom.setAllData(file, updatedData);
+    } catch (DAOException e) {
+      logger.error(e.getMessage());
     }
-
-
-
-
-    logger.info("Установка пользователей:\n" + record.toString());
-    
-    return null;
   }
 
-  
-  public String convertTakenBooksToRecord(ArrayList<ITakenBook> takenBooks) {
-    StringBuilder response = new StringBuilder();
+  private ArrayList<ITakenBook> getTakenBooksArrayList(String[] customerBooks) {
+   ArrayList<ITakenBook> takenBooks = new ArrayList<>();
+   for (String customerBook : customerBooks) {
+     String[] customerBookData = customerBook.split(Delimiter.DELIM3);
+     String author = customerBookData[0];
+     String title = customerBookData[1];
+     Rarity rarity = Rarity.valueOf(customerBookData[2]);
+     Date takeData = new Date(Long.parseLong(customerBookData[3]));
+     Date returnData = new Date(Long.parseLong(customerBookData[4]));
+     ITakenBook takenBook = new TakenBook(author, title, rarity, takeData, returnData);
+     takenBooks.add(takenBook);
+   }
+   return takenBooks;
+  }
+
+  private String takenBooksConvertToRecord(ArrayList<ITakenBook> takenBooks) {
+    StringBuilder takenBooksInform = new StringBuilder();
     for (ITakenBook takenBook : takenBooks) {
-      response.append(takenBook.getAuthor())
-          .append(Delimiter.DELIM3).append(takenBook.getTitle())
-          .append(Delimiter.DELIM3).append(takenBook.getRarity())
-          .append(Delimiter.DELIM3).append(takenBook.getTakeDate().getTime())
-          .append(Delimiter.DELIM3).append(takenBook.getReturnDate().getTime())
-          .append(Delimiter.DELIM2);
+     takenBooksInform.append(takenBook.getAuthor())
+         .append(Delimiter.DELIM3).append(takenBook.getTitle())
+         .append(Delimiter.DELIM3).append(takenBook.getRarity())
+         .append(Delimiter.DELIM3).append(takenBook.getTakeDate().getTime())
+         .append(Delimiter.DELIM3).append(takenBook.getReturnDate().getTime())
+         .append(Delimiter.DELIM2);
     }
-    return response.toString();
+    return ("\n" + outputSourceCustom.wrapFieldsToTag(takenBooksInform.toString(), "TakenBooks")
+       + Delimiter.DELIM1);
   }
 
-  private <C, E> IUser createUser(String[] arrayOfDataAboutObject, Class<C> customer,
-      Class<E> employee) throws DAOException {
+  private IUser findUser(String userName, String password) throws DAOException {
+    String[] usersFields = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file),
+        "User");
+    for (String userInform : usersFields) {
+      String[] userFields = inputSourceCustom.separateByDelimiter(userInform, Delimiter.DELIM1);
+      if (userName.equals(userFields[1]) && password.equals(userFields[3])) {
+        return createUser(userFields);
+      }
+    }
+    throw new DAOException("\nВНИМАНИЕ! Неверное имя пользователя или пароль!\n");
+  }
+
+  private String findUserRecord(String userName, String password) throws DAOException {
+    String[] usersFields = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file),
+        "User");
+    for (String userInform : usersFields) {
+      String[] userFields = inputSourceCustom.separateByDelimiter(userInform, Delimiter.DELIM1);
+      if (userName.equals(userFields[1]) && password.equals(userFields[3])) {
+        return outputSourceCustom.wrapFieldsToTag(userInform, "User");
+      }
+    }
+    throw new DAOException("\nUnfortunately the user's record with taken params is absent!\n");
+  }
+
+  private IUser createUser(String[] arrayOfDataAboutObject) throws DAOException {
 
     String userName = arrayOfDataAboutObject[1];
     String name = arrayOfDataAboutObject[2];
     String pass = arrayOfDataAboutObject[3];
     int age = Integer.parseInt(arrayOfDataAboutObject[4]);
-
-    if (customer.toString().equals(arrayOfDataAboutObject[0])) {
+    if (Customer.class.toString().equals(arrayOfDataAboutObject[0])) {
       try {
-//         подлежит исправлению
         String takenBooks = inputSourceCustom.findTagsFields(arrayOfDataAboutObject[5],
-            "TakenBooks")[0];
-
-        String[] takenBooksArray = inputSourceCustom.separateByDelimiter(takenBooks, Delimiter.DELIM2);
-
+            "TakenBooks")[0];  // <-- the Customer class has only one field of TakenBooks.
+        //     It means that method return an array with one element.
+        String[] takenBooksArray = inputSourceCustom.separateByDelimiter(takenBooks,
+            Delimiter.DELIM2);
         return new Customer(userName, name, pass, age, getTakenBooksArrayList(takenBooksArray));
-      } catch (Exception e){
-        return new Customer(userName, name, pass, age, new ArrayList<>()); //new array
+      } catch (Exception e) {
+        return new Customer(userName, name, pass, age, new ArrayList<>());
       }
     }
-
-    if (employee.toString().equals(arrayOfDataAboutObject[0])) {
+    if (Employee.class.toString().equals(arrayOfDataAboutObject[0])) {
       return new Employee(userName, name, pass, age);
     }
-
-    logger.debug("Класс извлекаемого объекта не совпадает с ожидаемым.");
+    logger.error("Класс извлекаемого объекта не совпадает с ожидаемым.");
     throw new DAOException("Невалидные данные. Проверьте целостность файла данных!");
-
   }
 
-  private ArrayList<ITakenBook> getTakenBooksArrayList(String[] customerBooks) {
-    ArrayList<ITakenBook> takenBooks = new ArrayList<>();
-    String[] customerBooksArray = customerBooks;
-    for (String customerBook : customerBooksArray) {
-      String[] customerBookData = customerBook.split(Delimiter.DELIM3);
-      String author = customerBookData[0];
-      String title = customerBookData[1];
-      Rarity rarity = Rarity.valueOf(customerBookData[2]);
-      Date takeData = new Date(Long.parseLong(customerBookData[3]));
-      Date returnData = new Date(Long.parseLong(customerBookData[4]));
-      ITakenBook takenBook = new TakenBook(author, title, rarity, takeData, returnData);
-      takenBooks.add(takenBook);
-    }
-    return takenBooks;
-  }
-
-
-  private IUser findUser(String userName, String password) throws DAOException {
-    String[] users = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file), "User");
-
-
-    for (String user : users) {
-      String[] userDataArray = inputSourceCustom.separateByDelimiter(user, Delimiter.DELIM1);
-
-
-      if (userName.equals(userDataArray[1]) && password.equals(userDataArray[3])) {
-
-        return createUser(userDataArray, Customer.class, Employee.class);
+  private String usersConvertToRecord(ArrayList<IUser> users) {
+    StringBuilder userInform = new StringBuilder();
+    StringBuilder record = new StringBuilder();
+    for (IUser user : users) {
+      userInform
+          .append(user.getClass())
+          .append(Delimiter.DELIM1).append(user.getUserName())
+          .append(Delimiter.DELIM1).append(user.getName())
+          .append(Delimiter.DELIM1).append(user.getPass())
+          .append(Delimiter.DELIM1).append(user.getAge())
+          .append(Delimiter.DELIM1);
+      if (user.getClass().equals(Customer.class)) {
+        userInform.append(takenBooksConvertToRecord(((Customer) user).getTakenBooks()));
       }
+      record.append(outputSourceCustom.wrapFieldsToTag(userInform.toString(), "User")).append("\n");
+      userInform = new StringBuilder();
     }
-    throw new DAOException("\nВНИМАНИЕ! Неверное имя пользователя или пароль!\n");
+    return record.toString();
+  }
+
+  private String userConvertToRecord(IUser user){
+      String userInform =
+          user.getClass()
+          + Delimiter.DELIM1 + user.getUserName()
+          + Delimiter.DELIM1 + user.getName()
+          + Delimiter.DELIM1 + user.getPass()
+          + Delimiter.DELIM1 + user.getAge()
+          + Delimiter.DELIM1;
+      if (user.getClass().equals(Customer.class)) {
+        userInform += takenBooksConvertToRecord( ( (Customer)user ).getTakenBooks() ) ;
+      }
+      return outputSourceCustom.wrapFieldsToTag(userInform, "User");
   }
 
 

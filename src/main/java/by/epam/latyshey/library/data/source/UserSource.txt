@@ -1,5 +1,0 @@
-class by.epam.latyshey.library.bean.Employee¶Professor¶Карл¶123456¶56¶
-class by.epam.latyshey.library.bean.Customer¶DocDolitle¶Соня¶123456¶8¶
-class by.epam.latyshey.library.bean.Customer¶Midas¶Вова¶123456¶28¶Эрих Мария Ремарк§Три товарища§RARE§1646330236500§1647539836500▼Антуан де Сент-Экзюпери§Маленький принц§RARE§1646330236516§1647539836516▼Федор Достоевский§Преступление и наказание§ORDINARY§1646330300709§1648144700709▼Михаил Булгаков§Мастер и Маргарита§ORDINARY§1646330322654§1648144722654▼
-class by.epam.latyshey.library.bean.Customer¶VicLay¶Витя¶123456¶22¶Чарльз Дарвин§Происхождение видов§RARE§1646330236528§1647539836528▼Ричард Докинз§Эгоистичный ген§VERY_RARE§1646330236528§1646935036528▼
-class by.epam.latyshey.library.bean.Customer¶Valter¶Генадий¶123456¶23¶Николай Гоголь§Тарас Бульба§ORDINARY§1646332536761§1648146936761▼

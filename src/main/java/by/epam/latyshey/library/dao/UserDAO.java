@@ -15,5 +15,5 @@ public interface UserDAO {
 
   void setUsers(ArrayList<IUser> users);
 
-  String updateUser(String userName, String password, IUser newUser);
+  void updateUser(String userName, String password, IUser newUser);
 }
