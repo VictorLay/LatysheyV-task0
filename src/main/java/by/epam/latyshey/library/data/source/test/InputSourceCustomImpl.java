@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 public class InputSourceCustomImpl implements InputSourceCustom {
 
-  private static Logger logger = LogManager.getLogger(InputSourceCustomImpl.class);
+  private static final Logger logger = LogManager.getLogger(InputSourceCustomImpl.class);
 
   @Override
   public String readAllData(File file) {
@@ -34,7 +34,7 @@ public class InputSourceCustomImpl implements InputSourceCustom {
   @Override
   public String findTags(String data, String tag) {
     Pattern pattern = Pattern.compile(
-        "\\s?(<" + tag + ">)+?\\s*\\n+[\\s\\S]{0,}?(<\\/" + tag + ">)+?\\s*?");
+        "\\s?(<" + tag + ">)+?\\s*\\n+[\\s\\S]*?(</" + tag + ">)+?\\s*?");
     Matcher matcher = pattern.matcher(data);
     StringBuilder inter = new StringBuilder();
     while (matcher.find()) {
@@ -45,6 +45,10 @@ public class InputSourceCustomImpl implements InputSourceCustom {
     return inter.toString().trim();
   }
 
+  /**
+   * The method is searches usages of chosen tag and splits to String array this information
+   * which was between tags.
+   */
   @Override
   public String[] findTagsFields(String data, String tag) {
     String tagsString = findTags(data, tag);

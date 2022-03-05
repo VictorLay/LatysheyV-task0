@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class OutputSourceCustomImpl implements OutputSourceCustom {
 
-  private static Logger logger = LogManager.getLogger(OutputSourceCustomImpl.class);
+  private static final Logger logger = LogManager.getLogger(OutputSourceCustomImpl.class);
 
   /**
    * The method adds a new record to Data Source File.
@@ -70,8 +70,7 @@ public class OutputSourceCustomImpl implements OutputSourceCustom {
 
   @Override
   public String updateData(String data, String oldData, String newData) {
-    String res = data.replace(oldData, newData);
-    return res;
+    return data.replace(oldData, newData);
   }
 
 
