@@ -15,7 +15,6 @@ import by.epam.latyshey.library.dao.BookDAO;
 import by.epam.latyshey.library.dao.HistoryDAO;
 import by.epam.latyshey.library.dao.UserDAO;
 import by.epam.latyshey.library.dao.exception.DAOException;
-import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.exception.ServiceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class CustomerServiceImplTest {
+class CustomerServiceImplTest {
 
   private String author;
   private String title;
@@ -57,7 +56,7 @@ public class CustomerServiceImplTest {
 
 
   @Test
-  public void tryAddBookToTheCustomerExpectedRightResponse() throws ServiceException, DAOException {
+  void tryAddBookToTheCustomerExpectedRightResponse() throws ServiceException, DAOException {
 
     when(userDAO.signIn(username, password)).thenReturn(
         (IUser) new Customer(username, name, password, age));

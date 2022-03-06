@@ -11,9 +11,11 @@ import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 public class InputSourceCustomImpl implements InputSourceCustom {
 
   private static final Logger logger = LogManager.getLogger(InputSourceCustomImpl.class);
+
 
   @Override
   public String readAllData(File file) {

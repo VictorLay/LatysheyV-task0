@@ -11,7 +11,7 @@ public interface BooksService {
 
   String update(IBook book, IBook updateBook);
 
-  IBook giveOutBook(String author, String title);
+  IBook deleteBook(String author, String title);
 
   String showAllBook();
 }

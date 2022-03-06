@@ -11,7 +11,6 @@ public class ShowCustomers implements Command {
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     EmployeeService employeeService = serviceFactory.getEmployeeService();
 
-    String response = employeeService.showCustomers();
-    return response;
+    return employeeService.showCustomers();
   }
 }

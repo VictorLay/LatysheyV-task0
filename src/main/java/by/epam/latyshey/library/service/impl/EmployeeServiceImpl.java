@@ -20,12 +20,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public String showCustomers() {
-    ArrayList<IUser> users = userDAO.showSQLUser();
+
     StringBuilder response = new StringBuilder();
-    for (IUser customer : users) {
-      if (customer instanceof Customer) {
-        response.append("Клиент:").append(customer.getName()).append(" возраст:")
-            .append(customer.getAge()).append(".\n");
+    for (IUser user : userDAO.showSQLUser()) {
+      if (user instanceof Customer) {
+        response.append("Клиент:").append(user.getName()).append(" возраст:").append(user.getAge())
+            .append(".\n");
       }
     }
     return response.toString();
@@ -33,14 +33,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public String showHistory() {
-    ArrayList<ICustomerHistory> history = historyDAO.readHistory();
+    ArrayList<ICustomerHistory> histories = historyDAO.readHistory();
+    histories.sort(new HistoriesComparator());
+
     StringBuilder response = new StringBuilder();
     int i = 1;
-    history.sort(new HistoriesComparator());
-    for (ICustomerHistory h : history) {
+    for (ICustomerHistory history : histories) {
       response.append("----------------------------------------------------------------\n")
           .append("[Пользователь: ").append(i++).append("]\n")
-          .append(h.toString()).append("\n")
+          .append(history.toString()).append("\n")
           .append("----------------------------------------------------------------\n");
     }
     return response.toString();

@@ -51,6 +51,8 @@ public class UserSQLTest {
         new TakenBook("rightAuthor3", "rightTitle3", RARE, new Date(111000), new Date(222000)));
     expectedUser = new Customer("rightUserName", "rightName", "rightPassword", 1,
         expectedTakenBooks);
+    testLogger.info("Витя Инфо");
+    
   }
 
   @After
@@ -127,11 +129,14 @@ public class UserSQLTest {
   public void updateUser() {
     IUser updatedUser = new Customer("updatedUserName", "updatedName", "updatedPassword", 20);
     sql.updateUser(expectedUser.getUserName(), expectedUser.getPass(), updatedUser);
+    IUser signInUser = null;
     try {
-      assert sql.signIn(updatedUser.getUserName(), updatedUser.getPass()) != null;
+      signInUser = sql.signIn(updatedUser.getUserName(), updatedUser.getPass());
+      assert signInUser != null;
     } catch (DAOException e) {
       testLogger.info(e.getMessage());
       assert false;
     }
+    assertEquals(updatedUser, signInUser);
   }
 }

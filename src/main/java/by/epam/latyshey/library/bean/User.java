@@ -10,7 +10,7 @@ public abstract class User implements IUser, Serializable {
   private String pass;
   private int age;
 
-  public User(String userName, String name, String pass, int age) {
+  protected User(String userName, String name, String pass, int age) {
     this.userName = userName;
     this.name = name;
     this.pass = pass;

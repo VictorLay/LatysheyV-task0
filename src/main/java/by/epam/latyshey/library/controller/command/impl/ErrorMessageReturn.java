@@ -7,7 +7,6 @@ public class ErrorMessageReturn implements Command {
 
   @Override
   public String execute(String query) {
-    String response = MenuName.ERROR_VIEW + query.substring(query.indexOf(","));
-    return response;
+    return MenuName.ERROR_VIEW + query.substring(query.indexOf(","));
   }
 }

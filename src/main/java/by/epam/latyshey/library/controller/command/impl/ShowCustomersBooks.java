@@ -10,8 +10,8 @@ public class ShowCustomersBooks implements Command {
 
   @Override
   public String execute(String query) {
-    String username = query.split(",")[2],
-        pass = query.split(",")[4];
+    String username = query.split(",")[2];
+    String pass = query.split(",")[4];
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     CustomerService customerService = serviceFactory.getCustomerService();

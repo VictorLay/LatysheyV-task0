@@ -8,8 +8,8 @@ public class ReadBook implements Command {
 
   @Override
   public String execute(String query) {
-    String author = query.split(",")[2],
-        title = query.split(",")[4];
+    String author = query.split(",")[2];
+    String title = query.split(",")[4];
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     BooksService booksService = serviceFactory.getBooksService();
 

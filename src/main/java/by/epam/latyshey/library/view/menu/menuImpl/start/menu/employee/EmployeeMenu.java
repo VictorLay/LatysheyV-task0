@@ -17,16 +17,16 @@ public class EmployeeMenu implements MenuCreate {
     MenuController menuController = controllerConnection.getMenuController();
     Controller controller = controllerConnection.getController();
 
-    EmployeeMenuView(controller, menuController);
+    employeeMenuView(controller, menuController);
   }
 
-  private void EmployeeMenuView(Controller controller, MenuController menuController) {
+  private void employeeMenuView(Controller controller, MenuController menuController) {
     System.out.println("\n Привет " + SessionParameters.getLoggedInUser().getName()
         + "! \nРад приветствовать нашего работника.\n");
 
-    final String SHOW_ALL_CUSTOMERS = "2",
-        SHOW_CUSTOMERS_HISTORIES = "1",
-        EXIT = "3";
+    final String SHOW_ALL_CUSTOMERS = "2";
+    final String SHOW_CUSTOMERS_HISTORIES = "1";
+    final String EXIT = "3";
     Scanner scanner = new Scanner(System.in);
     boolean exit = true;
     do {

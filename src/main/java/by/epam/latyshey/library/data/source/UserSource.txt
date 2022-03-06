@@ -10,7 +10,7 @@ class by.epam.latyshey.library.bean.Customer¶DocDolitle¶Соня¶123456¶8¶
 <User>
 class by.epam.latyshey.library.bean.Customer¶Midas¶Вова¶123456¶28¶
 <TakenBooks>
-Эрих Мария Ремарк§Три товарища§RARE§1646474579967§1647684179967▼Антуан де Сент-Экзюпери§Маленький принц§RARE§1646474579972§1647684179972▼Виктор Гюго§Отверженные§ORDINARY§1646474622725§1648289022725▼
+Эрих Мария Ремарк§Три товарища§RARE§1646474579967§1647684179967▼Антуан де Сент-Экзюпери§Маленький принц§RARE§1646474579972§1647684179972▼
 </TakenBooks>¶
 </User>
 <User>
@@ -20,68 +20,8 @@ class by.epam.latyshey.library.bean.Customer¶VicLay¶Витя¶123456¶22¶
 </TakenBooks>¶
 </User>
 <User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
+class by.epam.latyshey.library.bean.Customer¶Andyy¶Борис¶MyPassword¶25¶
 <TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Victor¶Latyshey¶123456¶18¶
-<TakenBooks>
-
+Николай Гоголь§Тарас Бульба§ORDINARY§1646491867090§1648306267090▼
 </TakenBooks>¶
 </User>

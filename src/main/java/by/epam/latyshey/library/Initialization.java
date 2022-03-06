@@ -8,6 +8,9 @@ import by.epam.latyshey.library.view.ControllerConnection;
 
 public class Initialization {
 
+  private Initialization() {
+  }
+
   public static void init() {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     Controller controller = controllerConnection.getController();

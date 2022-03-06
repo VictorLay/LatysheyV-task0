@@ -1,6 +1,5 @@
 package by.epam.latyshey.library.dao;
 
-import by.epam.latyshey.library.bean.Book;
 import by.epam.latyshey.library.bean.interfaces.IBook;
 import by.epam.latyshey.library.dao.exception.DAOException;
 

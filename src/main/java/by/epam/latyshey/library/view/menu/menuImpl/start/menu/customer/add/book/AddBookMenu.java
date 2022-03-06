@@ -16,12 +16,12 @@ public class AddBookMenu implements MenuCreate {
     Controller controller = controllerConnection.getController();
     MenuController menuController = controllerConnection.getMenuController();
 
-    AddBookMenuView(controller, menuController);
+    addBookMenuView(controller, menuController);
   }
 
-  private void AddBookMenuView(Controller controller, MenuController menuController){
-    String userName = SessionParameters.getLoggedInUser().getUserName(),
-          pass = SessionParameters.getLoggedInUser().getPass();
+  private void addBookMenuView(Controller controller, MenuController menuController){
+    String userName = SessionParameters.getLoggedInUser().getUserName();
+    String pass = SessionParameters.getLoggedInUser().getPass();
     Scanner scanner = new Scanner(System.in);
     System.out.println("Введи автора:");
     String author = scanner.nextLine();

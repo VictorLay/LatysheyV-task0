@@ -11,9 +11,9 @@ public class ReturnBook implements Command {
 
   @Override
   public String execute(String query) {
-    String username = query.split(",")[2],
-        pass = query.split(",")[4],
-        index = query.split(",")[6];
+    String username = query.split(",")[2];
+    String pass = query.split(",")[4];
+    String index = query.split(",")[6];
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     CustomerService customerService = serviceFactory.getCustomerService();

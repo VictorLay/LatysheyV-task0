@@ -17,15 +17,15 @@ public class ReturnBookMenu implements MenuCreate {
     Controller controller = controllerConnection.getController();
     MenuController menuController = controllerConnection.getMenuController();
 
-    ReturnBookMenuView(controller, menuController);
+    returnBookMenuView(controller, menuController);
   }
 
-  private void ReturnBookMenuView(Controller controller, MenuController menuController) {
+  private void returnBookMenuView(Controller controller, MenuController menuController) {
     boolean exit = true;
     Scanner scanner = new Scanner(System.in);
     String response;
-    String userName = SessionParameters.getLoggedInUser()
-        .getUserName(), pass = SessionParameters.getLoggedInUser().getPass();
+    String userName = SessionParameters.getLoggedInUser().getUserName();
+    String pass = SessionParameters.getLoggedInUser().getPass();
 
     do {
       response = controller.executeTask(

@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public String showSQLUser() {
-    String display = "";
+    StringBuilder display = new StringBuilder();
     ArrayList<IUser> users = daoUser.showSQLUser();
     for (IUser user : users) {
       String role;
@@ -26,18 +26,18 @@ public class UserServiceImpl implements UserService {
         } else {
             role = "Работник";
         }
-      display += role + ": " + user.getUserName() + ", имя: " + user.getName() +
-          ", пароль: " + user.getPass() + ", возраст: " + user.getAge() + ".\n";
+      display.append(role).append(": ").append(user.getUserName()).append(", имя: ")
+          .append(user.getName()).append(", пароль: ").append(user.getPass()).append(", возраст: ")
+          .append(user.getAge()).append(".\n");
     }
-    return display;
+    return display.toString();
   }
 
   @Override
   public String signIn(String username, String password) throws ServiceException {
     try {
 
-      String response = daoUser.signIn(username, password).toString();
-      return response;
+      return daoUser.signIn(username, password).toString();
 
     } catch (DAOException exception) {
       throw new ServiceException(exception);

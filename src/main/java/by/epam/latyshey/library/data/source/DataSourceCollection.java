@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class DataSourceCollection {
 
   private static final DataSourceCollection instance = new DataSourceCollection();
-  private static ArrayList<IBook> books = new ArrayList<>();
-  private static ArrayList<ICustomerHistory> histories = new ArrayList<>();
+  private ArrayList<IBook> books = new ArrayList<>();
+  private ArrayList<ICustomerHistory> histories = new ArrayList<>();
 
   private DataSourceCollection() {
   }
@@ -22,7 +22,7 @@ public class DataSourceCollection {
   }
 
   public void setBooks(ArrayList<IBook> books) {
-    DataSourceCollection.books = books;
+    this.books = books;
   }
 
   public ArrayList<ICustomerHistory> getHistories() {
@@ -30,6 +30,6 @@ public class DataSourceCollection {
   }
 
   public void setHistories(ArrayList<ICustomerHistory> histories) {
-    DataSourceCollection.histories = histories;
+    this.histories = histories;
   }
 }

@@ -30,7 +30,7 @@ public class UserSQL implements UserDAO {
 
   public UserSQL(){
     this.file = new File(
-        "src/main/java/by/epam/latyshey/library/data/source/test/UserSource.txt");
+        "src/main/java/by/epam/latyshey/library/data/source/UserSource.txt");
   }
 
   /**

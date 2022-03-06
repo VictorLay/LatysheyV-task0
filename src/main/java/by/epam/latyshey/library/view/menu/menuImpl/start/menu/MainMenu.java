@@ -9,7 +9,10 @@ import java.util.Scanner;
 
 public class MainMenu implements MenuCreate {
 
-  public static final String AUTHORIZATION = "1", REGISTRATION = "2", EXIT = "3", SHOW_USER_SQL = "4";
+  public static final String AUTHORIZATION = "1";
+  public static final String REGISTRATION = "2";
+  public static final String EXIT = "3";
+  public static final String SHOW_USER_SQL = "4";
 
   @Override
   public void executeResponse(String response) {

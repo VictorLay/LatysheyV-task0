@@ -70,7 +70,7 @@ public class OutputSourceCustomImpl implements OutputSourceCustom {
   }
 
   /**
-   * The method take element and set it in the construction <"tag"> element "tag">.
+   * The method take element and set it in the construction (tag) element (/tag).
    *
    * @param data the element is equal fields of object which need to wrap in tag
    * @param tag  using for wrapping element on this tag.

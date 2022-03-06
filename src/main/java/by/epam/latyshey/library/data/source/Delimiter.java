@@ -1,6 +1,10 @@
 package by.epam.latyshey.library.data.source;
 
 public class Delimiter {
+
+    private Delimiter() {
+    }
+
     public static final String DELIM1 = "¶"; //alt 20
     public static final String DELIM2 = "▼"; //alt 287
     public static final String DELIM3 = "§"; //alt 21

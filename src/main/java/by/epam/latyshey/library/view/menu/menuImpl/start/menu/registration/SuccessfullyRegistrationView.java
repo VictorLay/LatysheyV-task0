@@ -7,15 +7,15 @@ public class SuccessfullyRegistrationView implements MenuCreate {
   @Override
   public void executeResponse(String query) {
     String[] queryArray = query.split(",");
-    String Status = queryArray[1],
-        userName = queryArray[3],
-        name = queryArray[5],
-        age = queryArray[9];
+    String status = queryArray[1];
+    String userName = queryArray[3];
+    String name = queryArray[5];
+    String age = queryArray[9];
     System.out.println(
           "================================================================\n" +
           "Введённые данные успешно прошли проверку. Добавлен новый пользо-\n" +
           "ватель:\n" +
-          "Статус: " + Status + "\n" +
+          "Статус: " + status + "\n" +
           "Имя пользователя: " + userName + "\n" +
           "Имя: " + name + "\n" +
           "Возраст:" + age + "\n" +

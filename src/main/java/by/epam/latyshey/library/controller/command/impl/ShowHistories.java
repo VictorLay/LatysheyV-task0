@@ -11,7 +11,6 @@ public class ShowHistories implements Command {
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     EmployeeService employeeService = serviceFactory.getEmployeeService();
 
-    String response = employeeService.showHistory();
-    return response;
+    return employeeService.showHistory();
   }
 }

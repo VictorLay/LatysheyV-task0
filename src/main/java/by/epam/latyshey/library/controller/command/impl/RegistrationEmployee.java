@@ -10,9 +10,9 @@ public class RegistrationEmployee implements Command {
   @Override
   public String execute(String request) {
 
-    String username = request.split(",")[2],
-        name = request.split(",")[4],
-        pass = request.split(",")[6];
+    String username = request.split(",")[2];
+    String name = request.split(",")[4];
+    String pass = request.split(",")[6];
     int age = Integer.parseInt(request.split(",")[8]);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();

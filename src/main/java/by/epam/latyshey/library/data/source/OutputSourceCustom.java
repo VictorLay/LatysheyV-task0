@@ -3,7 +3,7 @@ package by.epam.latyshey.library.data.source;
 import java.io.File;
 
 public interface OutputSourceCustom {
-    boolean addNewRecord(File file, String record);
+    boolean addNewRecord(File file, String newRecord);
     boolean setAllData(File file, String data);
 
     String wrapFieldsArrayToTag(String[] dataArray, String tag);

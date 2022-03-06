@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class RegistrationMenu implements MenuCreate {
 
-  public static final String CUSTOMER = "1", EMPLOYEE = "2";
+  public static final String CUSTOMER = "1";
+  public static final String EMPLOYEE = "2";
 
   @Override
   public void executeResponse(String response) {
@@ -63,11 +64,14 @@ public class RegistrationMenu implements MenuCreate {
 
   private String createQueryWithUsersFields() {
     Scanner scanner = new Scanner(System.in);
-    String userName, name, pass, age = "";
+    String userName;
+    String name;
+    String pass;
+    String age = "";
     boolean exit = true;
     do {
       System.out.println("""
-          Имя пользователя должно содержать не менее 4-х символов ( А-я, A-z, 0-9, - и _ ).
+          Имя пользователя должно содержать не менее 5-и символов ( А-я, A-z, 0-9, - и _ ).
           Имя должно содержать не менее 3-х символов (А-я, A-z и " " ).
           Пароль должен содержать не менее 6-ти символов
           """);
@@ -101,9 +105,7 @@ public class RegistrationMenu implements MenuCreate {
 
     } while (exit);
 
-    String response =
-        "," + "name=" + "," + userName + "," + "name=" + "," + name + "," + "pass=" + "," + pass
-            + "," + "age=" + "," + age + ",";
-    return response;
+    return "," + "name=" + "," + userName + "," + "name=" + "," + name + "," + "pass=" + "," + pass
+        + "," + "age=" + "," + age + ",";
   }
 }

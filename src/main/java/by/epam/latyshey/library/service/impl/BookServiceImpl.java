@@ -7,8 +7,6 @@ import by.epam.latyshey.library.dao.BookDAO;
 import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.BooksService;
 
-import java.util.ArrayList;
-
 public class BookServiceImpl implements BooksService {
 
   DAOFactory daoFactory = DAOFactory.getInstance();
@@ -17,10 +15,8 @@ public class BookServiceImpl implements BooksService {
   @Override
   public String showAllBook() {
     StringBuilder response = new StringBuilder();
-    ArrayList<IBook> books = daoBook.showAllBooks();
-
-    for (IBook b : books) {
-      response.append(b.toString()).append("\n");
+    for (IBook book : daoBook.showAllBooks()) {
+      response.append(book.toString()).append("\n");
     }
     return response.toString();
   }
@@ -41,7 +37,7 @@ public class BookServiceImpl implements BooksService {
   }
 
   @Override
-  public IBook giveOutBook(String author, String title) {
+  public IBook deleteBook(String author, String title) {
     return null;
   }
 }

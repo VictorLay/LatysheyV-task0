@@ -16,11 +16,11 @@ public class SaveState implements Serializable {
 
   @Override
   public String toString() {
-    String response = "";
+    StringBuilder response = new StringBuilder();
     for (IUser user : this.users) {
-      response += user.toString() + "\n";
+      response.append(user.toString()).append("\n");
     }
-    return response;
+    return response.toString();
   }
 
   public void setUsers(ArrayList<IUser> users) {

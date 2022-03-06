@@ -11,8 +11,6 @@ public class SerializeSave implements Command {
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     SerializeService serializeService = serviceFactory.getSerializeService();
 
-    String response = serializeService.save();
-
-    return response;
+    return serializeService.save();
   }
 }

@@ -16,7 +16,6 @@ public class SerializeLoad implements Command {
       response = serializeService.load();
     }
     catch (ServiceException e){
-      //log4j System.out.println(e.getMessage());
       response = "";
     }
 

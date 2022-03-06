@@ -9,8 +9,8 @@ public class AddBook implements Command {
 
   @Override
   public String execute(String query) {
-    String author = query.split(",")[2],
-        title = query.split(",")[4];
+    String author = query.split(",")[2];
+    String title = query.split(",")[4];
     Rarity rarity = Rarity.valueOf(query.split(",")[6]);
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     BooksService booksService = serviceFactory.getBooksService();
