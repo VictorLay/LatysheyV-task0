@@ -27,6 +27,8 @@ public class UserSQL implements UserDAO {
   private final InputSourceCustom inputSourceCustom = new InputSourceCustomImpl();
   private final OutputSourceCustom outputSourceCustom = new OutputSourceCustomImpl();
   private static final Logger logger = LogManager.getLogger(UserSQL.class);
+  private static final String USER_TAG = "User";
+  private static final String TAKEN_BOOKS_TAG = "TakenBooks";
 
   public UserSQL(){
     this.file = new File(
@@ -56,7 +58,7 @@ public class UserSQL implements UserDAO {
 
   @Override
   public ArrayList<IUser> showSQLUser() {
-    String[] users = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file), "User");
+    String[] users = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file), USER_TAG);
     ArrayList<IUser> allUsers = new ArrayList<>();
     for (String user : users) {
       String[] userDataArray = inputSourceCustom.separateByDelimiter(user, Delimiter.DELIM1);
@@ -114,13 +116,13 @@ public class UserSQL implements UserDAO {
          .append(Delimiter.DELIM3).append(takenBook.getReturnDate().getTime())
          .append(Delimiter.DELIM2);
     }
-    return ("\n" + outputSourceCustom.wrapFieldsToTag(takenBooksInform.toString(), "TakenBooks")
+    return ("\n" + outputSourceCustom.wrapFieldsToTag(takenBooksInform.toString(), TAKEN_BOOKS_TAG)
        + Delimiter.DELIM1);
   }
 
   private IUser findUser(String userName, String password) throws DAOException {
     String[] usersFields = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file),
-        "User");
+        USER_TAG);
     for (String userInform : usersFields) {
       String[] userFields = inputSourceCustom.separateByDelimiter(userInform, Delimiter.DELIM1);
       if (userName.equals(userFields[1]) && password.equals(userFields[3])) {
@@ -132,11 +134,11 @@ public class UserSQL implements UserDAO {
 
   private String findUserRecord(String userName, String password) throws DAOException {
     String[] usersFields = inputSourceCustom.findTagsFields(inputSourceCustom.readAllData(file),
-        "User");
+        USER_TAG);
     for (String userInform : usersFields) {
       String[] userFields = inputSourceCustom.separateByDelimiter(userInform, Delimiter.DELIM1);
       if (userName.equals(userFields[1]) && password.equals(userFields[3])) {
-        return outputSourceCustom.wrapFieldsToTag(userInform, "User");
+        return outputSourceCustom.wrapFieldsToTag(userInform, USER_TAG);
       }
     }
     throw new DAOException("\nUnfortunately the user's record with taken params is absent!\n");
@@ -151,7 +153,7 @@ public class UserSQL implements UserDAO {
     if (Customer.class.toString().equals(arrayOfDataAboutObject[0])) {
       try {
         String takenBooks = inputSourceCustom.findTagsFields(arrayOfDataAboutObject[5],
-            "TakenBooks")[0];  // <-- the Customer class has only one field of TakenBooks.
+            TAKEN_BOOKS_TAG)[0];  // <-- the Customer class has only one field of TakenBooks.
         //     It means that method return an array with one element.
         String[] takenBooksArray = inputSourceCustom.separateByDelimiter(takenBooks,
             Delimiter.DELIM2);
@@ -181,7 +183,7 @@ public class UserSQL implements UserDAO {
       if (user.getClass().equals(Customer.class)) {
         userInform.append(takenBooksConvertToRecord(((Customer) user).getTakenBooks()));
       }
-      record.append(outputSourceCustom.wrapFieldsToTag(userInform.toString(), "User")).append("\n");
+      record.append(outputSourceCustom.wrapFieldsToTag(userInform.toString(), USER_TAG)).append("\n");
       userInform = new StringBuilder();
     }
     return record.toString();
@@ -198,7 +200,7 @@ public class UserSQL implements UserDAO {
       if (user.getClass().equals(Customer.class)) {
         userInform += takenBooksConvertToRecord( ( (Customer)user ).getTakenBooks() ) ;
       }
-      return outputSourceCustom.wrapFieldsToTag(userInform, "User");
+      return outputSourceCustom.wrapFieldsToTag(userInform, USER_TAG);
   }
 
 
