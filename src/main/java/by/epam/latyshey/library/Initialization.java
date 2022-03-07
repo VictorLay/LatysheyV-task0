@@ -3,7 +3,10 @@ package by.epam.latyshey.library;
 import by.epam.latyshey.library.bean.Rarity;
 import by.epam.latyshey.library.controller.Controller;
 import by.epam.latyshey.library.controller.command.CommandName;
+import by.epam.latyshey.library.data.source.OutputSourceCustom;
+import by.epam.latyshey.library.data.source.impl.OutputSourceCustomImpl;
 import by.epam.latyshey.library.view.ControllerConnection;
+import java.io.File;
 
 
 public class Initialization {
@@ -14,6 +17,9 @@ public class Initialization {
   public static void init() {
     ControllerConnection controllerConnection = ControllerConnection.getInstance();
     Controller controller = controllerConnection.getController();
+    File file = new File("src/main/java/by/epam/latyshey/library/data/source/UserSource.txt");
+    OutputSourceCustom out = new OutputSourceCustomImpl();
+    out.setAllData(file, "");
 
     controller.executeTask(
         CommandName.REGISTRATION_EMPLOYEE + ",userName=,Professor,name=,Карл,pass=,123456,age=,56");

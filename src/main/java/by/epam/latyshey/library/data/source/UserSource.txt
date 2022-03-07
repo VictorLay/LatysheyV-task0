@@ -10,18 +10,12 @@ class by.epam.latyshey.library.bean.Customer¶DocDolitle¶Соня¶123456¶8¶
 <User>
 class by.epam.latyshey.library.bean.Customer¶Midas¶Вова¶123456¶28¶
 <TakenBooks>
-Эрих Мария Ремарк§Три товарища§RARE§1646474579967§1647684179967▼Антуан де Сент-Экзюпери§Маленький принц§RARE§1646474579972§1647684179972▼
+Эрих Мария Ремарк§Три товарища§RARE§1646648348276§1647857948276▼Антуан де Сент-Экзюпери§Маленький принц§RARE§1646648348276§1647857948276▼
 </TakenBooks>¶
 </User>
 <User>
 class by.epam.latyshey.library.bean.Customer¶VicLay¶Витя¶123456¶22¶
 <TakenBooks>
-Чарльз Дарвин§Происхождение видов§RARE§1646474579982§1647684179982▼Ричард Докинз§Эгоистичный ген§VERY_RARE§1646474579982§1647079379982▼
-</TakenBooks>¶
-</User>
-<User>
-class by.epam.latyshey.library.bean.Customer¶Andyy¶Борис¶MyPassword¶25¶
-<TakenBooks>
-Николай Гоголь§Тарас Бульба§ORDINARY§1646491867090§1648306267090▼
+Чарльз Дарвин§Происхождение видов§RARE§1646648348292§1647857948292▼Ричард Докинз§Эгоистичный ген§VERY_RARE§1646648348292§1647253148292▼
 </TakenBooks>¶
 </User>

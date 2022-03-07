@@ -138,16 +138,12 @@ Q
 !javadoc/index-files/index-11.html,b\f\bf12acd1f7b8a9cff4666cec0d6aeb2169a5463f
 í
 bjavadoc/by/epam/latyshey/library/view/menu/menuImpl/start/menu/employee/exit/EmployeeExitView.html,6\9\696f8dcff58c845521806edec1ec1241f2a49015
-j
-:src/main/java/by/epam/latyshey/library/Initialization.java,1\b\1b5867832b2d1860f1ea8dc90db2687f8dca71f7
 ë
 ajavadoc/by/epam/latyshey/library/view/menu/menuImpl/start/menu/customer/exit/package-summary.html,5\d\5df61de9ea59053a20b4a03d16a15b9d0e036f9c
 é
 ^javadoc/by/epam/latyshey/library/view/menu/menuImpl/start/menu/customer/exit/package-tree.html,7\8\787cb85792a91c9e633267bb9bccc3d4be1ee03b
 í
 bjavadoc/by/epam/latyshey/library/view/menu/menuImpl/start/menu/customer/exit/CustomerExitView.html,b\6\b6e1559887a3f77dff8e4d91f28c1a18f5382fc8
-b
-2src/main/java/by/epam/latyshey/library/Runner.java,0\d\0dd447a0f355e1aa44be2eae63f19c7bdf5eb4b9
 è
 _javadoc/by/epam/latyshey/library/view/menu/menuImpl/start/menu/show/users/ShowAllUsersView.html,1\5\156b5831039d722400f43722ffd2f5c18185d6a8
 g
@@ -632,3 +628,7 @@ Ojavadoc/by/epam/latyshey/library/controller/command/impl/AddBookToCustomer.html
 Usrc/main/java/by/epam/latyshey/library/controller/command/impl/AddBookToCustomer.java,9\c\9c8929b8fdfd88df81806449abe27098b8c6b09e
 M
 javadoc/allclasses-index.html,0\9\096e70dc8dfa770be2bd5729716b4101520cf135
+a
+1javadoc/by/epam/latyshey/library/bean/Rarity.html,7\4\747eb34cbef3807449fe5dc9bad849e9a14df4f2
+ó
+gsrc/main/java/by/epam/latyshey/library/view/menu/menuImpl/start/menu/registration/RegistrationMenu.java,9\8\98d96a81a1aa0a9ba379406c6b4b785567a54d0f
