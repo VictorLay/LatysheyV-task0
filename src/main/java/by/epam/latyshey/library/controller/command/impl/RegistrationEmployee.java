@@ -17,8 +17,7 @@ public class RegistrationEmployee implements Command {
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     EmployeeService employeeService = serviceFactory.getEmployeeService();
-    employeeService.registration(new Employee(username, name, pass, age));
 
-    return null;
+    return employeeService.registration(new Employee(username, name, pass, age));
   }
 }

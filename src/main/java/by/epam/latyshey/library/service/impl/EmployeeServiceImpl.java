@@ -10,6 +10,7 @@ import by.epam.latyshey.library.dao.UserDAO;
 import by.epam.latyshey.library.dao.factory.DAOFactory;
 import by.epam.latyshey.library.service.EmployeeService;
 
+import by.epam.latyshey.library.view.menu.MenuName;
 import java.util.ArrayList;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -48,7 +49,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public void registration(IEmployee employee) {
+  public String registration(IEmployee employee) {
     userDAO.registration(employee);
+
+    return MenuName.SUCCESS_REGISTRATION_VIEW + "," + employee;
   }
 }

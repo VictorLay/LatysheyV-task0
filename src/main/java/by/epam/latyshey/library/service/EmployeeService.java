@@ -5,7 +5,7 @@ import by.epam.latyshey.library.bean.interfaces.IEmployee;
 
 public interface EmployeeService {
 
-  void registration(IEmployee employee);
+  String registration(IEmployee employee);
 
   String showHistory();
 
