@@ -11,10 +11,6 @@ u
 Esrc/main/java/by/epam/latyshey/library/bean/interfaces/IEmployee.java,5\8\58704e2589f4b1ad8ef5f4bd5ed3218d9dc6b278
 v
 Fsrc/main/java/by/epam/latyshey/library/bean/interfaces/ITakenBook.java,0\0\00e062b578bdd4c84653fa49a3c74c7d07d4268e
-g
-7src/main/java/by/epam/latyshey/library/bean/Rarity.java,7\a\7a4c12170b0f9649754f2681d3f95174ab449547
-i
-9src/main/java/by/epam/latyshey/library/bean/Employee.java,6\a\6a8b27fdcb219eef53dc6d945b06d6114ff61440
 „
 Tsrc/main/java/by/epam/latyshey/library/view/menu/menuImpl/view/ShowResponseView.java,5\3\53f7d4202d3dd2ebd8bf06f33151bce32a17d84d
 Ž
@@ -106,8 +102,6 @@ N
 javadoc/allpackages-index.html,9\c\9c0a186c22474b9af2fceb83a5c897c37692f4a1
 F
 javadoc/stylesheet.css,9\1\911d46256f9a8e0bf1012312afa1b9ca9c5ec371
-e
-5src/main/java/by/epam/latyshey/library/bean/User.java,c\8\c8fbdc195f77ad7e4a30b23169d3387856f29dea
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 ‘
@@ -604,3 +598,13 @@ u
 Esrc/test/java/by/epam/latyshey/library/validation/ValidationTest.java,1\d\1dfba95878d72f148712747860e34810b4d7d893
 o
 ?src/main/java/by/epam/latyshey/library/view/MenuController.java,b\4\b4ae29ecd4a9cbc13f56d16b71dea981913ff1cf
+q
+Asrc/main/java/by/epam/latyshey/library/controller/Controller.java,a\1\a14ea88b356ebfd3c990e47b9fbc5d5c0de97703
+ˆ
+Xsrc/main/java/by/epam/latyshey/library/controller/command/impl/RegistrationCustomer.java,c\8\c84c9dcae1b9213cce6f5d873c4b31dae9e9ec91
+s
+Csrc/main/java/by/epam/latyshey/library/service/CustomerService.java,3\1\312e94f6ef298b3ae77fe1df12cb29cc1b4c06b2
+u
+Esrc/main/java/by/epam/latyshey/library/bean/interfaces/ICustomer.java,3\9\39790b041f064a2166b08d6aeb40e7c89951c6ca
+|
+Lsrc/main/java/by/epam/latyshey/library/bean/interfaces/ICustomerHistory.java,5\0\50def728ca6823cad84d5510455a7de5904c068e

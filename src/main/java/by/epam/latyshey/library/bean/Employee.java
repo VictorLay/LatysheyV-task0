@@ -6,9 +6,13 @@ import java.io.Serializable;
 public class Employee extends User implements IEmployee, Serializable {
 
   private static int numberOfInstance = 0;
+
+  static {
+    numberOfInstance++;
+  }
+
   public Employee(String userName, String name, String pass, int age) {
     super(userName, name, pass, age);
-    numberOfInstance++;
   }
 
   public static int getNumberOfInstance() {

@@ -10,8 +10,11 @@ public class Book implements Serializable, IBook {
   private String title;
   private Rarity rarity;
 
-  public Book(String author, String title, Rarity rarity) {
+  static {
     numberOfInstance++;
+  }
+
+  public Book(String author, String title, Rarity rarity) {
     this.rarity = rarity;
     this.author = author;
     this.title = title;

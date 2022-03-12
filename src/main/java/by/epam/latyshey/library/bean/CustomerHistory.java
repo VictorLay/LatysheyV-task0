@@ -13,17 +13,17 @@ public class CustomerHistory implements ICustomerHistory, Serializable, Comparab
   private final ICustomer customer;
   private ArrayList<ITakenBook> takenBooks;
 
-
+  static {
+    numberOfInstance++;
+  }
 
   public CustomerHistory(ICustomer customer) {
     takenBooks = new ArrayList<>();
     this.customer = customer;
-    numberOfInstance++;
   }
   public CustomerHistory(ArrayList<ITakenBook> takenBooks, ICustomer customer) {
     this.takenBooks = takenBooks;
     this.customer = customer;
-    numberOfInstance++;
   }
 
   public static int getNumberOfInstance() {
